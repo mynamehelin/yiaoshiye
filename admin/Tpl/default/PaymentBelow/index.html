@@ -1,0 +1,46 @@
+{// 引入标签库 }
+<tagLib name="html" />
+
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+
+<load href='__TMPL__Common/style/weebox.css' />
+
+
+
+<div class="main">
+<div class="main_title">线上充值</div>
+<div class="blank5"></div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		ID: <input type="text" class="textbox" name="id" value="{:trim($_REQUEST['id'])}" style="width:30px;" />	
+		<input type="hidden" value="PaymentBelow" name="m" />
+		<input type="hidden" value="index" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="user" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px:ID
+		,username:会员名
+		,pay_type:充值类型
+		,money_off:充值金额
+		,off_way:转帐方式
+		,time|to_date:充值时间
+		,tran_id:账单流水号
+		,off_bank:入账银行
+		,pay_state:充值状态" 
+	actionlist="edit:{%AUDIT},del:{%DEL}"/> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,54 @@
+{include file="inc/header_account.html"}
+<style type="text/css">
+	body{background:#f8f8f8;}
+</style>
+<div class="p15 pr15 pt20 category-con" id="categoryList">
+	<h2 class="category">
+		<a href="">全部项目</a>
+	</h2>
+	<ul class="category-table clearfix">
+		{foreach from=$cates item=cates_item}
+		<li>
+			<a href="{url_wap r="deals#index" p="id=$cates_item.id"}" title="{$cates_item.name}">{$cates_item.name}</a>
+		</li>
+		{/foreach}
+	</ul>
+	{foreach from=$cates item=cates_item key=k}
+	<h2 class="category {if $k%4 eq 0}category_bg1{/if}{if $k%4 eq 1}category_bg2{/if}{if $k%4 eq 2}category_bg3{/if}{if $k%4 eq 3}category_bg4{/if}">
+		<a href="{url_wap r="deals#index" p="id=$cates_item.id"}" title="{$cates_item.name}">{$cates_item.name}</a>
+	</h2>
+	<ul class="category-table sub-category-table clearfix">
+		{foreach from=$cates_list item=cates_list_item}
+		{if $cates_item.id eq $cates_list_item.pid}
+			<li>
+				<a href="{url_wap r="deals#index" p="id=$cates_list_item.id"}" title="{$cates_list_item.name}">{$cates_list_item.name}</a>
+			</li>
+		{/if}
+		{/foreach}
+	</ul>
+	{/foreach}
+</div>
+<script type="text/javascript">
+	$(".category-table").each(function(){
+		var li_num = $(this).find("li").length;
+		if(li_num<4){
+			var left_num = 4-li_num;
+			for (i = 0; i < left_num; i++){
+				$(this).append("<li></li>");
+			}
+		}
+		else{
+			var left_num = li_num % 4;
+			for (i = 0; i < left_num; i++){
+				$(this).append("<li></li>");
+			}
+		}
+	});
+	$(".sub-category-table").each(function(){
+		if(!($(this).find("li").html())){
+			$(this).hide();
+			$(this).prev().hide();
+		}
+	});
+</script>
+{include file="inc/footer.html"}

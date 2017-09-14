@@ -1,0 +1,289 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<style>
+table {
+	display: table;
+	border-collapse: collapse;
+	border-spacing: 2px;
+	border-color: gray;
+	font: 12px/1.5 tahoma, arial, 宋体b8b\4f53, sans-serif;
+}
+thead {
+	display: table-header-group;
+	vertical-align: middle;
+	background-color: #ccc;
+	line-height: 30px;
+}
+tbody {
+	display: table-row-group;
+	vertical-align: middle;
+	border-color: inherit;
+}
+tr {
+	display: table-row;
+	vertical-align: inherit;
+	border-color: inherit;
+}
+td, th {
+	display: table-cell;
+	vertical-align: inherit;
+}
+.table-list thead th {
+	height: 30px;
+	background: #E5F3FC;
+	border: 1px solid #d5dfe8;
+	font-weight: normal;
+	color: #243C5A;
+	text-align:center;
+}
+.table-list tr td {
+	 border:1px solid #c3d8ed;
+}
+
+
+</style>
+<php>
+	
+
+</php>
+<div class="main">
+<div class="main_title">
+	分红列表
+</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="分红" onclick="sharing();" />
+	<input type="button" class="button" value="分红列表" onclick="sharingList();" />
+	<input type="button" class="button" value="发起投票" onclick="voteList();" />
+</div>
+
+
+<div class="blank5"></div>
+<div class="search_row">
+
+		分红指标:<input type="text"  onkeyup="value=value.replace(/\D/g,'')" class="textbox" id="price" value="" style="width:100px;" /><span class="tip_span">(按照万元比例分红)</span>
+		<input type="hidden" id="deaid" value={:trim($_REQUEST['id'])}>
+		<input type="submit" class="button" onclick="ratioMoney()" value="确认" />
+
+
+	<script language="javascript" type="text/javascript">
+			function ratioMoney(){
+					if($("#price").val()==''){
+						alert("请输入分红比例");
+						return false;
+					}else{
+						var price = $("#price").val()/10000;
+						var ratioMoney = (Math.round(price*10000)/100.00+"%");
+						$("#body_main tr").each(function(){
+							//筹资金额 
+							var moneyOne=eval($(this).children(".money").html());
+							//分红金额
+							var moneyval=eval($(this).children(".money").html()*price);
+							//分红总额
+							var moneySum = moneyval+moneyOne;
+							$(this).children(".ratio").html(ratioMoney);
+							$(this).children(".charing").html(moneyval);
+							$(this).children(".summoney").html(moneySum);
+							
+						})
+					}
+				};
+				/**
+				分红
+				*/
+			function sharing(){
+				$("#body_main tr").each(function(){
+					var userName = $(this).children(".name").html();
+					var userMoney = $(this).children(".summoney").html();
+					var dealInfo = $(this).children(".dealName").html();
+					var usrId = $(this).children(".usrId").html();
+					var mobile = $(this).children(".mobile").html();
+					var rationMoney = $("#price").val()/10000;//eval($(this).children(".ratio").html()/100);
+					var charingMoney = $(this).children(".charing").html();
+					var sumMnoney = $(this).children(".summoney").html();
+					var sid = $(this).children(".sid").html();
+						if(userMoney==''){
+								alert("发放筹款不能为空!");
+								return;
+						}else{
+							saveMoney(userName,userMoney,dealInfo,usrId,rationMoney,charingMoney,sumMnoney,sid);
+							//调用短信模板
+							send_demo(mobile);
+					
+						}
+						
+						
+				});
+				alert("分红成功！")
+
+				
+			};
+			
+			
+			function voteList(){
+				$("#body_main tr").each(function(){
+					var mobile = $(this).children(".mobile").html();
+					sendVote(mobile);	
+			
+				});
+				alert("发送成功");
+			}
+			function sendVote(mobile)
+			{
+					$.ajax({ 
+							url: ROOT+"?"+"m"+"="+"Sms"+"&"+"a"+"=send_vote&test_mobile="+mobile,
+							type:'post',
+							data: {"ajax":1,"nowmobile":mobile},
+							dataType: "json",
+							success: function(obj){
+								if(obj.status==0)
+								{
+									alert(obj.info);
+								}
+								else
+									$("#info").html(obj.info);							
+	
+							}
+					});
+			
+			}	
+			
+			
+				function send_demo(mobile){	
+					$.ajax({ 
+							url: ROOT+"?"+"m"+"="+"Sms"+"&"+"a"+"=send_charing&test_mobile="+mobile,
+							type:'post',
+							data: {"ajax":1,"nowmobile":mobile},
+							dataType: "json",
+							success: function(obj){
+								if(obj.status==0)
+								{
+									alert(obj.info);
+								}
+								else
+									$("#info").html(obj.info);							
+	
+							}
+					});
+				}
+			
+			function saveMoney(userName,userMoney,dealInfo,usrId,rationMoney,charingMoney,sumMnoney,sid){
+				$.post("/pay/upMoney.php",{"userName":userName,"moneyNum":userMoney,"dealInfo":dealInfo,"usrId":usrId,"rationMoney":rationMoney,"charingMoney":charingMoney,"sumMnoney":sumMnoney,"sid":sid},function(data){
+				
+				});
+			};
+			
+			function sharingList()
+			{
+			
+				 document.getElementById("show").style.display="";
+			}
+			function closeLogin()
+			{
+			
+			document.getElementById("show").style.display="none";
+			
+			}
+	</script>
+</div>
+<div class="blank5"></div>
+<div class="table-list" style="display: block;">        
+  <!--start-->
+  <table width="100%" cellspacing="0" >
+	<thead>
+		<tr>
+            <th align="center">编号</th>
+            <th align="center">项目名称</th>
+            <th align="center">筹资者</th>
+            <th align="center">筹资金额</th>
+            <th align="center">分红比例(%)</th>
+			<th align="center">分红金额</th> 
+			<th align="center">发放筹款</th>			
+		</tr>
+    </thead>
+	    <tbody id="body_main">
+		<?php $members=$GLOBALS['db']->getAll("select * from  ".DB_PREFIX."user_sharing where  deal_id='".$_REQUEST['id']."'"); ?>
+		
+		   <?php foreach($members as $v){
+		   ?>
+					<tr>
+						<td align="center" class="sid"><?php echo $v['id']; ?></td>
+						<td align="center" class="dealName"><?php echo $v['deal_info']; ?></td>	
+						<td align="center" class="name"><?php echo $v['user_name']; ?></td>
+						<td align="center" class="money"><?php echo abs($v['money']); ?></td>
+						<td align="center" class="ratio"></td>
+						<td align="center" class="charing"></td>
+						<td align="center" class="summoney"></td>				      	
+						<td align="center" class="usrId" style="display:none;"><?php echo abs($v['user_id']); ?></td>	
+						<td align="center" class="mobile" style="display:none;"><?php echo abs($v['user_mobile']); ?></td>	
+						
+			      	
+					</tr>
+				<?php } ?>
+		</tbody>
+</table>
+</div><!--table-list end-->
+<div id="show" style="display:none;width:100%;height:100%;position:absolute;top:0px;">
+<div style="width:100%;height:100%;background-color:#000;position:absolute;top:0px;-moz-opacity:0.4;opacity:0.4;filter:alpha(opacity=40);"></div>
+<div class="table-list"  style=" POSITION:absolute; left:50%; top:50%; width:1200px; height:400px; margin-left:-661px; margin-top:-200px; border:2px solid #888;background-color: #fff; text-align:center">
+</br><a href="javascript:closeLogin();"><h3 style="color:#de1641">关闭</h3></a>
+  <!--start-->
+  <table width="100%" cellspacing="0" >
+	<thead>
+		<tr>
+            <th align="center">编号</th>
+            <th align="center">项目名称</th>
+            <th align="center">筹资者</th>
+            <th align="center">筹资金额</th>
+            <th align="center">分红比例(%)</th>
+			<th align="center">分红金额</th> 
+			<th align="center">发放筹款</th>			
+		</tr>
+    </thead>
+	    <tbody id="body_main2">
+		<?php $members=$GLOBALS['db']->getAll("select * from  ".DB_PREFIX."user_sharing where  deal_id='".$_REQUEST['id']."'"); ?>
+		
+		   <?php foreach($members as $v){
+		   ?>
+					<tr>
+						<td align="center" ><?php echo $v['id']; ?></td>
+						<td align="center"><?php echo $v['deal_info']; ?></td>	
+						<td align="center"><?php echo $v['user_name']; ?></td>
+						<td align="center"><?php echo abs($v['money']); ?></td>
+						<td align="center"><?php echo $v['proportion_money']; ?></td>
+						<td align="center"><?php echo $v['sharing_money']; ?></td>
+						<td align="center"><?php echo $v['cont_money']; ?></td>				      	
+					</tr>
+				<?php } ?>
+		</tbody>
+</table>
+</div>
+</div>
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<include file="Public:footer" />

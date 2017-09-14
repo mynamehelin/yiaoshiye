@@ -1,0 +1,49 @@
+<body onload="document.getElementById('Form1').submit();">
+<?php
+header("Content-type: text/html; charset=utf-8");
+
+   $ReturnArray = array( // 返回字段
+            "memberid" => $_REQUEST["memberid"], // 商户ID
+            "orderid" =>  $_REQUEST["orderid"], // 订单号
+            "amount" =>  $_REQUEST["amount"], // 交易金额
+            "datetime" =>  $_REQUEST["datetime"], // 交易时间
+            "returncode" => $_REQUEST["returncode"]
+			
+        );
+      
+        $Md5key = "gfq1fgYa3UtalfAwmesh8lOVrOYihm";
+
+		
+		///////////////////////////////////////////////////////
+		ksort($ReturnArray);
+        reset($ReturnArray);
+        $md5str = "";
+        foreach ($ReturnArray as $key => $val) {
+            $md5str = $md5str . $key . "=" . $val . "&";
+        }
+
+        $sign = strtoupper(md5($md5str . "key=" . $Md5key));
+
+		///////////////////////////////////////////////////////
+        if ($sign == $_REQUEST["sign"]) {
+            if ($_REQUEST["returncode"] == "00") {
+		$str = '<form id="Form1" name="Form1" method="post" action="http://www.yiaoshiye.com/index.php?ctl=account&act=FHJRmonyPAY">';
+     
+            $str = $str . '<input type="hidden" name="money" value="' . $ReturnArray['amount'] . '">';
+     $str = $str . '<input type="hidden" name="payid" value="' . $_REQUEST['payid'] . '">';
+	 $str = $str . '<input type="hidden" name="orderid" value="' . $_REQUEST['orderid'] . '">';
+		//$str = $str . '<input type="submit" value="提交">';
+        $str = $str . '</form>';
+        $str = $str . '<script>';
+        //$str = $str . 'document.Form1.submit();';
+        $str = $str . '</script>';
+        exit($str);
+
+		   }
+        }
+
+?>
+
+</body>
+
+

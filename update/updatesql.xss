@@ -1,0 +1,93 @@
+1.51;
+-- ----------------------------
+-- Table structure for `%DB_PREFIX%m_adv`
+-- ----------------------------
+DROP TABLE IF EXISTS `%DB_PREFIX%m_adv`;
+CREATE TABLE `%DB_PREFIX%m_adv` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT '',
+  `img` varchar(255) DEFAULT '',
+  `page` varchar(20) DEFAULT '',
+  `type` tinyint(1) DEFAULT '0' COMMENT '1.标签集,2.url地址,3.分类排行,4.最亮达人,5.搜索发现,6.一起拍,7.热门单品排行,8.直接显示某个分享',
+  `data` text,
+  `sort` smallint(5) DEFAULT '10',
+  `status` tinyint(1) DEFAULT '1',
+  `open_url_type` int(11) DEFAULT '0' COMMENT '0:使用内置浏览器打开url;1:使用外置浏览器打开',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of %DB_PREFIX%m_adv
+-- ----------------------------
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('20', '171', '', 'deal', '1', '216', '12', '1', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('22', '百度广告', 'http://www.baidu.com/img/bd_logo.png', 'top', '2', 'http://www.baidu.com', '14', '0', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('13', '享客来1', '', 'deal', '1', '135', '5', '1', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('11', '手机广告', './public/attachment/201203/03/09/4f5175debd973.jpg', 'top', '2', 'http://www.baidu.com', '4', '0', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('21', 'test', './public/attachment/201408/14/14/53ec52560a0cd.jpg', 'top', '2', 'http://www.baidu.com', '13', '1', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('19', '108', '', 'deal', '1', '108', '11', '1', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('23', '平整占2', '', 'top', '1', '1', '15', '0', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('17', '首页广告测试刷新功能', './public/attachment/201407/30/09/53d84720ecff4.jpg', 'top', '2', 'http://www.baidu.com', '9', '1', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_adv` VALUES ('18', '信贷的测试2', './public/attachment/201407/29/15/53d752859c703.jpg', 'top', '2', 'http://www.baidu.com', '10', '1', '0');
+
+-- ----------------------------
+-- Table structure for `%DB_PREFIX%m_config`
+-- ----------------------------
+DROP TABLE IF EXISTS `%DB_PREFIX%m_config`;
+CREATE TABLE `%DB_PREFIX%m_config` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `val` text,
+  `type` tinyint(1) NOT NULL,
+  `sort` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of %DB_PREFIX%m_config
+-- ----------------------------
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('10', 'kf_phone', '客服电话', '400-000-0000', '0', '1');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('11', 'kf_email', '客服邮箱', 'qq@fanwe.com', '0', '2');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('29', 'ios_upgrade', 'ios版本升级内容', '', '3', '9');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('16', 'page_size', '分页大小', '10', '0', '10');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('17', 'about_info', '关于我们(填文章ID)', '66', '0', '3');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('18', 'program_title', '程序标题名称', 'P2P信贷系统', '0', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('22', 'android_version', 'android版本号(yyyymmddnn)', '2014082101', '0', '4');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('23', 'android_filename', 'android下载包名(放程序根目录下)', '%DB_PREFIX%P2P.apk', '0', '5');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('24', 'ios_version', 'ios版本号(yyyymmddnn)', '2014082009', '0', '7');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('25', 'ios_down_url', 'ios下载地址(appstore连接地址)', '', '0', '8');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('28', 'android_upgrade', 'android版本升级内容', '修复bug', '3', '6');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('30', 'article_cate_id', '文章分类ID', '15', '0', '11');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('31', 'android_forced_upgrade', '是否强制升级(0:否;1:是)', '1', '0', '0');
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('32', 'ios_forced_upgrade', '是否强制升级(0:否;1:是)', '1', '0', '0');
+
+INSERT IGNORE INTO `%DB_PREFIX%m_config` VALUES ('35', 'logo', '系统LOGO', '', '2', '1');
+INSERT IGNORE INTO `%DB_PREFIX%role_group` VALUES ('62', '手机端设置', '3', '0', '1', '1');
+
+INSERT IGNORE INTO `%DB_PREFIX%role_module` VALUES ('93', 'MAdv', '手机端广告', '1', '0');
+
+INSERT IGNORE INTO `%DB_PREFIX%role_node` VALUES ('483', 'mobile', '手机端配置', '1', '0', '62', '12');
+INSERT IGNORE INTO `%DB_PREFIX%role_node` VALUES ('484', 'index', '手机端广告列表', '1', '0', '62', '93');
+INSERT IGNORE INTO `%DB_PREFIX%role_node` VALUES ('485', 'savemobile', '保存手机端配置', '1', '0', '0', '12');
+-- ----------------------------
+-- lym
+-- ----------------------------
+INSERT IGNORE INTO `%DB_PREFIX%m_config`  (id,code,title,val,type,sort) VALUES (33,'index_adv_num','首页广告数',5,0,33);
+INSERT IGNORE INTO `%DB_PREFIX%m_config`  (id,code,title,val,type,sort) VALUES (34,'index_pro_num','首页推荐商品数',0,0,34);
+
+ALTER TABLE `%DB_PREFIX%deal` ADD COLUMN `deal_background_image` varchar(255) NOT NULL COMMENT '项目背景图片';
+
+ALTER TABLE `%DB_PREFIX%deal` ADD COLUMN `deal_backgroundColor_image` varchar(255) NOT NULL COMMENT '项目底色图片';
+
+ALTER TABLE `%DB_PREFIX%deal_comment` ADD COLUMN `status`  tinyint(1) NULL DEFAULT 0 COMMENT '状态0 表示隐藏 ，1 表示 显示' ;
+
+ALTER TABLE `%DB_PREFIX%user` ADD COLUMN `verify_time`  int(11) NULL COMMENT '验证发送时间';
+
+ALTER TABLE `%DB_PREFIX%user` ADD COLUMN `verify_setting`  varchar(255) NULL COMMENT '设置时候的验证码' ;
+
+ALTER TABLE `%DB_PREFIX%user` ADD COLUMN `verify_setting_time`  int(11) NOT NULL COMMENT '设置时间' ;
+
+INSERT IGNORE INTO `%DB_PREFIX%msg_template` VALUES ('4', 'TPL_MAIL_CHANGE_USER_VERIFY', '<table cellpadding=\"0\" cellspacing=\"0\" bgcolor=\"\" width=\"100%\" style=\"background:#ffffff;\" class=\"baidu_pass\">\r\n<tbody>\r\n	<tr>\r\n		<td>\r\n		<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\r\n        <tbody>\r\n		<tr>\r\n			<td style=\"background:#ffffff;border-bottom:2px solid #dfdfdf;width:15px;\">&nbsp;</td>\r\n			<td style=\"background:#ffffff;border-bottom:2px solid #ffffff;width:10px;\">&nbsp;</td>\r\n			<td style=\"background:#ffffff;width:137px;\"><img src=\"{$user.logo}\" class=\"logo\" ellpadding=\"0\" cellspacing=\"0\"></td>\r\n			<td style=\"background:#ffffff;border-bottom:2px solid #ffffff;width:10px;\">&nbsp;</td>\r\n			<td style=\"background:#ffffff;border-bottom:2px solid #dfdfdf;\">&nbsp;</td>\r\n		</tr>\r\n        </tbody>\r\n		</table>\r\n		</td>\r\n	</tr>\r\n	<tr>\r\n		<td>\r\n		<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\r\n        <tbody>\r\n		<tr>\r\n			<td width=\"25px;\" style=\"width:25px;\"></td>\r\n			<td align=\"\">\r\n				<div style=\"line-height:40px;height:40px;\"></div>\r\n				<p style=\"margin:0px;padding:0px;\"><strong style=\"font-size:14px;line-height:24px;color:#333333;font-family:arial,sans-serif;\">亲爱的用户：</strong></p>\r\n				<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#333333;font-family:\'宋体\',arial,sans-serif;\">您好！</p>\r\n				<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#333333;font-family:\'宋体\',arial,sans-serif;\">您于 {$user.send_time_ms} 进行邮件修改 <a href=\"mailto:{$user.email}\" target=\"_blank\">{$user.email}<wbr>.com</a> ，点击以下链接，即可进行下一步操作：</p>\r\n				<p style=\"margin:0px;padding:0px;\"><a href=\"{$user.verify_url}\" style=\"line-height:24px;font-size:12px;font-family:arial,sans-serif;color:#0000cc\" target=\"_blank\">{$user.verify_url}</a></p>\r\n				<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#979797;font-family:arial,sans-serif;\">(如果您无法点击此链接，请将它复制到浏览器地址栏后访问)</p>\r\n				<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#333333;font-family:\'宋体\',arial,sans-serif;\">1、为了保障您帐号的安全性，请在 48小时内完成激活，此链接将在您激活过一次后失效！</p>\r\n				<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#333333;font-family:\'宋体\',arial,sans-serif;\">2、注册的帐号可以畅行{$user.site_name}产品</p>\r\n				<div style=\"line-height:80px;height:80px;\"></div>\r\n				<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#333333;font-family:\'宋体\',arial,sans-serif;\">{$user.site_name}帐号团队</p>\r\n				<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#333333;font-family:\'宋体\',arial,sans-serif;\"><span style=\"border-bottom:1px dashed #ccc;\" t=\"5\" times=\"\">{$user.send_time}</span></p>\r\n			</td>\r\n		</tr>\r\n		</tbody>\r\n		</table>\r\n		</td>\r\n	</tr>\r\n	<tr>\r\n		<td>\r\n			<table cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-top:1px solid #dfdfdf\">\r\n			<tbody>\r\n			<tr>\r\n				<td width=\"25px;\" style=\"width:25px;\"></td>\r\n				<td align=\"\">\r\n					<div style=\"line-height:40px;height:40px;\"></div>\r\n					<p style=\"margin:0px;padding:0px;line-height:24px;font-size:12px;color:#979797;font-family:\'宋体\',arial,sans-serif;\">若您没有注册过{$user.site_name}帐号，请忽略此邮件，此帐号将不会被激活，由此给您带来的不便请谅解。</p>\r\n				</td>\r\n			</tr>\r\n			</tbody>\r\n			</table>\r\n		</td>\r\n	</tr>\r\n</tbody>\r\n</table>', '1', '1');
+ALTER TABLE `%DB_PREFIX%user_refund` ADD COLUMN `pay_log`  text NOT NULL COMMENT '支付说明';
+ALTER TABLE `%DB_PREFIX%article` ADD COLUMN `icon`  varchar(255) NOT NULL COMMENT '展示图表';
+UPDATE `%DB_PREFIX%conf` set `value` = '1.51' where name = ''; 

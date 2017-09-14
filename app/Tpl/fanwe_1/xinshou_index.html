@@ -1,0 +1,266 @@
+{include file="inc/header.html"}
+<?php
+$this->_var['pagecss_1'][] = $this->_var['TMPL_REAL']."/css/css.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/owl.theme.css";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery-1.7.1.min.js";
+$this->_var['dpagejs_1'][] = $this->_var['TMPL_REAL']."/js/layer.min.js";
+$this->_var['dpagejs_2'][] = $this->_var['TMPL_REAL']."/js/jquery.event.drag-1.5.min.js";
+$this->_var['dpagejs_3'][] = $this->_var['TMPL_REAL']."/js/jquery.touchSlider.js";
+$this->_var['dpagejs_4'][] = $this->_var['TMPL_REAL']."/js/my.js";
+$this->_var['dpagejs_5'][] = $this->_var['TMPL_REAL']."/js/jquery.SuperSlide.js";
+
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss_1"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dpagejs"}"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs_1" c="$dpagejs"}"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs_2" c="$dpagejs"}"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs_3" c="$dpagejs"}"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs_4" c="$dpagejs"}"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs_5" c="$dpagejs"}"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  $(".main_visual").hover(function(){
+
+    $("#btn_prev,#btn_next").fadeIn()
+
+  },function(){
+
+    $("#btn_prev,#btn_next").fadeOut()
+
+  });
+
+  
+
+  $dragBln = false;
+
+  
+
+  $(".main_image").touchSlider({
+
+    flexible : true,
+
+    speed : 200,
+
+    btn_prev : $("#btn_prev"),
+
+    btn_next : $("#btn_next"),
+
+    paging : $(".flicking_con a"),
+
+    counter : function (e){
+
+      $(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+
+    }
+
+  });
+
+  
+
+  $(".main_image").bind("mousedown", function() {
+	
+
+    $dragBln = false;
+
+  });
+
+  
+
+  $(".main_image").bind("dragstart", function() {
+
+    $dragBln = true;
+
+  });
+
+  
+
+  $(".main_image a").click(function(){
+
+    if($dragBln) {
+
+      return false;
+
+    }
+
+  });
+
+  
+
+  timer = setInterval(function(){
+
+    $("#btn_next").click();
+
+  }, 5000);
+
+  
+
+  $(".main_visual").hover(function(){
+
+    clearInterval(timer);
+
+  },function(){
+
+    timer = setInterval(function(){
+
+      $("#btn_next").click();
+
+    },5000);
+
+  });
+
+  
+
+  $(".main_image").bind("touchstart",function(){
+
+    clearInterval(timer);
+
+  }).bind("touchend", function(){
+
+    timer = setInterval(function(){
+
+      $("#btn_next").click();
+
+    }, 5000);
+
+  });
+
+  $("#footer").css("background","none");
+
+});
+
+</script>
+
+<style>
+
+</style>
+
+<div class="banner slideBox" id="banner">
+<div class="banner_cont effect_bd">
+		<ul style="height:600px">
+			<li style="height:600px"><a href="/index.php?ctl=user&act=register" target="_blank" style="display:block; height:600px;background: url(/app/Tpl/fanwe_1/images/bann.jpg) 50% 50% no-repeat;" ></a></li>
+		</ul>
+	</div>
+		<div class="btn_tit effect_hd" style="display: none;">
+			</div>
+</div>
+<div class="xinshou">
+
+<div class="xin1">
+<div class="containe" style="height:80px">
+<img src="/app/Tpl/fanwe_1/images/w1.png" style="margin:60px auto;"/></div>
+<img src="/app/Tpl/fanwe_1/images/g1.jpg"/></div>
+</div>
+
+<!--<div class="xin2" style="background:#ebeae9;">
+<div class="container">
+	<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/icon8.png" width="404" height="407"/>
+		<div class="xin2rig">
+			<h1><img src="/app/Tpl/fanwe_1/images/w2.png"/></div></h1>
+			<p style="float:left;width:660px;padding: 69px 35px;">国内首家专注于实体店铺众筹融资网络服务平台。集买车服务，卖车服务，租车服务，汽车物流服务，分期业务，众筹，投资价值，新型理财，结合实体经营车辆和网店开设于一体的良好的生态平衡系统。 是一个专注为线下二手车新车实体经营与线上理财投资资金经营提供信息对等资源整合全方位的服务型网站。 使实体业信息源优化，加大信息量，经营资金者的零散资金整合化一，放大资金能量加大收益，实现真正意义上的实体+互联网互利互惠基准。</p>
+	
+	
+	
+	
+		</div>
+	
+	<div class="clear"></div>
+</div>
+</div>-->
+<div class="xin3">
+<div style="width:1200px;"><img src="/app/Tpl/fanwe_1/images/w3.png" style="margin:60px auto;display:block;"/></div>
+
+<img src="/app/Tpl/fanwe_1/images/xinshou/xinshou_bj1.png"style="margin:0px auto;display:block;padding-bottom:40px;" />
+	<!-- <div class="container">
+		<h1>众筹流程</h1>
+			<p>4大产品优势，保障投资安全</p>
+	</div>
+		<div class="xin3con">
+			<div class="tabBar">
+				<div class="hdcon">
+					<div class="hd">
+						<ul>
+							<li class="on">
+								<h1>免费<br>注册</h1>
+							</li>
+							<li>
+								<h1>实名<br>认证</h1>
+							</li>
+							<li>
+								<h1>快速<br>充值</h1>
+							</li>
+							<li>
+								<h1>认筹<br>车辆</h1>
+							</li>
+							<li>
+								<h1>卖出<br>车辆</h1>
+							</li>
+							<li>
+								<h1>坐等<br>收益</h1>
+							</li>
+								<div class="clear"></div>
+						</ul>
+					</div>
+				</div>
+							
+							
+							<div class="bd">
+								<div class="tempWrap" style="overflow:hidden; position:relative; width:1200px">
+									<div class="conWrap" style="width: 7200px; position: relative; overflow: hidden; padding: 0px; margin: 0px; left: 0px;">
+										<div class="con"style="float: left; width: 1200px;">
+											<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/novice01.png"/>
+										</div>
+										<div class="con"style="float: left; width: 1200px;">
+											<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/novice02.png"/>
+										</div>
+										<div class="con"style="float: left; width: 1200px;">
+											<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/novice03.png"/>
+										</div>
+										<div class="con"style="float: left; width: 1200px;">
+											<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/novice04.png"/>
+										</div>
+										<div class="con"style="float: left; width: 1200px;">
+											<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/novice05.png"/>
+										</div>
+										<div class="con"style="float: left; width: 1200px;">
+											<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/novice06.png"/>
+										</div>
+										</div>
+											<a class="prev prevStop" href="javascript:void(0)">
+													<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/left.png">
+											</a>
+											<a class="next" href="javascript:void(0)">
+												<img src="http://qihangganwei.yiyhyg.com/app/Tpl/fanwe_1/images/xinshou/right.png">
+											</a>
+								</div>
+						
+			</div>
+			
+			
+					<script type="text/javascript"> 
+						$(document).ready(function(){
+
+							$(".tabBar").slide({
+
+							mainCell:".conWrap",
+
+							effect:"left", 
+
+							trigger:"click", 
+
+							pnLoop:false
+						});
+
+							$('.hd li:last').css({'background':'none'})
+
+						});
+			</script>              
+		</div>
+</div> -->
+</div>
+										
+
+{include file="inc/footer.html"} 

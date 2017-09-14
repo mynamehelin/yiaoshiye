@@ -1,0 +1,304 @@
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajax_user_login.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/ajax_user_login.js";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/login.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<style>
+.dlmain{position:relative;z-index:1;}
+.control-group{ float:left;overflow:visible; }
+.dlmain {width:345px;position:relative;z-index:1;background:url({$TMPL}/images/images/reglog_bg.gif) #fcfcfc repeat-y; }
+.control-group label{width:45px}
+.holder_tip{left:0;top:0;}
+
+.login {
+  width: 350px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  margin-top:120px;
+}
+.login .login_box {
+  width: 350px;
+  margin: 0 auto;
+}
+.login .login_box .login_top {
+  width: 350px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #fff;
+}
+.login .login_box .login_top span {
+  font-size: 17px;
+  color: #fff;
+  padding-right: 210px;
+}
+.login .login_box .login_top a {
+  font-size: 12px;
+  color: #fe9807;
+}
+.login .login_box .login_inp {
+  
+  height: 45px;
+  line-height: 45px;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 5px;
+}
+.login .login_box .login_inp img {
+  margin-left: 12px;
+  vertical-align: middle;
+}
+.login .login_box .login_inp input {
+  width: 300px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+}
+.login .login_box .login_inp .login_btn {
+  width: 350px;
+  height: 45px;
+  line-height: 45px;
+  background: #ffae00;
+  font-size: 18px;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-family: "微软雅黑";
+  cursor: pointer;
+  border-radius: 5px;
+}
+.login .login_box .login_inp .login_btn:hover {
+  background: #fe9807;
+}
+.login .login_box .login_yzm {
+  margin-top: 20px;
+}
+.login .login_box .login_yzm .inp_d {
+  width: 60%;
+  height: 45px;
+  line-height: 45px;
+  background: #fff;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+  text-indent: 10px;
+}
+.login .login_box .login_yzm img {
+  width: 110px;
+  height: 45px;
+
+}
+.login .login_box .login_che {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  margin-top: 20px;
+}
+.login .login_box .login_che label {
+  margin-right: 170px;
+  font-size: 16px;
+  color: #fff;
+}
+.login .login_box .login_che label input {
+  vertical-align: middle;
+}
+.login .login_box .login_che a {
+  color: #0a68ff;
+  margin-left-15px;
+}
+.container {
+  width: 100%;
+  height: 600px;
+  background: url(../images/dl_bg.jpg) no-repeat 50% 50%;
+  position: relative;
+}
+.login {
+  width: 400px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  min-height: 450px;
+  position: absolute;
+  right: 30%;
+  top: 50px;
+}
+.login .login_box {
+  width: 100%;
+  margin: 0 auto;
+}
+.login .login_box .login_top2 {
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+}
+.login .login_box .login_top2 a {
+  color: #fff;
+  padding: 0 15px;
+}
+.login .login_box .login_top2 .login_top2_a {
+  color: #ffc30d;
+}
+.login .login_box .login_inp {
+  width: 350px;
+  height: 45px;
+  line-height: 45px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 5px;
+}
+.login .login_box .login_inp img {
+  margin-left: 12px;
+  vertical-align: middle;
+}
+.login .login_box .login_inp input {
+  width: 300px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+}
+.login .login_box .login_inp .login_btn {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background: #ffae00;
+  font-size: 18px;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-family: "微软雅黑";
+  cursor: pointer;
+  border-radius: 5px;
+}
+.login .login_box .login_inp .login_btn:hover {
+  background: #fe9807;
+}
+.login .login_box .login_yzm {
+  margin-top: 10px;
+  width:300px;
+}
+.login .login_box .login_yzm .inp_d {
+  width: 60%;
+  height: 45px;
+  line-height: 45px;
+  background: ;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+  text-indent: 40px;
+  background: url(app/Tpl/fanwe_1/images/dl_2.png) no-repeat 12px center #ffffff;
+}
+.login .login_box .login_yzm img {
+  width: 110px;
+  height: 45px;
+
+}
+.login .login_box .login_yzm span {
+  display: inline-block;
+  *display: block;
+  width: 110px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 5px;
+  background: #ff624c;
+  text-align: center;
+  color: #fff;
+
+  cursor: pointer;
+}
+.login .login_box .login_che {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  margin-top: 10px;
+}
+.login .login_box .login_che label {
+  margin-right: 190px;
+  font-size: 16px;
+  color: #fff;
+}
+.login .login_box .login_che label input {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.login .login_box .login_che a {
+  color: #0a68ff;
+  margin-left:-15px;
+}
+.login .login_box .login_che .col_h {
+  color: #FE9807;
+}
+
+</style>
+<script> 
+
+$(document).keydown(function (event) {
+if (event.keyCode == 13) {
+$("#btn_do_login").click();
+}
+});
+
+ </script>
+<div class="blank"></div>
+        <!--中间开始-->
+         <div class="container" style="background:url(app/fanwe_1/images/www.jpg); width:100%;height:730px">
+        <div class="login  " style="margin-left:33%;border-radius: 20px; margin-top:-10px;right:40%;">
+        <div class="login_box">
+        <form id="user_login_form" name="user_login_form" action="{url r="user#do_login"}">
+<div class="login_top">
+        <span>用户登录</span>
+        <a  href="{url r="user#register"}">注册新用户</a>
+</div>
+<div class="login_inp">
+        <img src="app/Tpl/fanwe_1/images/dl_2.png"/>
+        <input type="text" name="email" id="email" value="" placeholder="用户名"/>
+        </div>
+        <div class="login_inp">
+        <img src="app/Tpl/fanwe_1/images/dl_1.png"/>
+        <input type="password" name="user_pwd"   placeholder="请输入密码"/>
+        </div>
+        <div class="login_yzm" style="margin-right:75px;">
+		
+        <input class="inp_d" type="text" name="adm_verify"  id="adm_verify" value="" placeholder="请输入验证码"/>
+        <img src="/verify.php"  id="verify" align="absmiddle"/>
+        </div>
+        <div class="login_che">
+        <label><input type="checkbox" name="" id="" value="" checked />记住密码</label>
+<a href="{url r="user#getpassword"}">忘记密码？</a>
+</div>
+<div class="login_inp">
+        <input type="button" value="登录" name="submit_form" class="btn_do_login login_btn" id="btn_do_login" />
+        <input type="hidden" value="1" name="ajax" />
+        <div class="blank15"></div>
+        </div>
+        </form>
+        </div>
+        <div class="blank"></div>
+        </div>
+        </div>
+
+        <!--中间结束-->
+        <script type="text/javascript">
+        $(function(){
+            show_tip();
+            setTimeout(autofillHide, 100);
+        });
+function autofillHide(){
+    var obj = $("input[name='email']");
+    var text = obj.val();
+    if(text){
+        $("#user_login_form").find(".holder_tip").hide();
+    }
+    else{
+        $("#user_login_form").find(".holder_tip").show();
+    }
+}
+</script>
+<div class="blank"></div>

@@ -1,0 +1,72 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/js/deal.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+<div class="main">
+<div class="main_title">{$deal_info.name} 放款记录</div>
+<div class="blank5"></div>
+<form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
+<table class="form conf_tab" cellpadding=0 cellspacing=0 >
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr class="type_class">
+		<td class="item_title">分红指标:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="price" />
+		<span class="tip_span">按照万元比例分红</span>
+		</td>
+	</tr
+	
+	
+	
+
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
+
+<div class="blank5"></div>
+	<table class="form" cellpadding=0 cellspacing=0>
+
+		<tr>
+			<td class="item_title">&nbsp;</td>
+			<td class="item_input">
+			<!--隐藏元素-->
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			<input type="hidden" name="{:conf("VAR_ACTION")}" value="" />
+			
+			<input type="hidden" id="deaid" name="deal_id"/>
+			<!--隐藏元素-->
+			<input type="submit" class="button" value="确认" />
+			<input type="reset" class="button" value="{%RESET}" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan=2 class="bottomTd"></td>
+		</tr>
+	</table> 		 
+</form>
+
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="log" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px,
+	deal_id:项目名称,
+	user_id:筹资者,
+	money|format_price:筹资金额,
+	score:分红比例,
+	point:分红金额,
+	log_admin_id:发放筹款"/> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

@@ -1,0 +1,198 @@
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/switch_city.js";
+
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/add_consignee.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/add_consignee.js";
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+
+<style type="text/css">
+	#Jbank_From .field {line-height: 30px;font-size: 12px;margin: 5px auto 5px;}
+	#Jbank_From .field label{ width:130px}
+	#Jbank_From .field input.f-input{ height:20px; line-height:20px; padding:5px}
+	#Jbank_From .field select{ height:30px; line-height:30px; }
+
+.control-group {
+	margin:0 0 5px 10px;
+	padding:5px 0;
+	overflow:hidden
+}
+.control-group .small-control-group{padding:0;}
+.control-group .control_label {
+	width:90px;
+	color:#666;
+	margin-right:10px;
+	text-align:right;
+	float:left;
+	font-size:14px;
+	height:41px;
+	line-height:41px;
+}
+.control-group .small_control_label{
+	width:109px;
+	color:#666;
+	margin-right:10px;
+	text-align:right;
+	float:left;
+	font-size:14px;
+	height:37px;
+	line-height:37px;
+}
+.control-group .smaller_control_label{
+	width:109px;
+	color:#666;
+	margin-right:10px;
+	text-align:right;
+	float:left;
+	font-size:14px;
+	height:26px;
+	line-height:26px;
+}
+.control-group .control_cont {
+	float:left;
+	height:41px;
+	line-height:41px;
+	color:#333;
+	font-size:14px;
+}
+.control-group .small_control_cont ,
+.control-group .small_control_cont *{
+	float:left;
+	height:37px;
+	line-height:37px;
+	color:#333;
+	font-size:14px;
+}
+.control-group .smaller_control_cont ,
+.control-group .smaller_control_cont *{
+	float:left;
+	height:26px;
+	line-height:26px;
+	color:#333;
+	font-size:14px;
+}
+.control-group .control-group .fileupload {
+	height:39px;
+	line-height:39px;
+}
+.control-group .control_unit{
+	height:41px;
+	line-height:41px;
+	display:block;
+	float:left;
+	font-size:14px;
+}
+.control-group .small_control_unit{
+	height:37px;
+	line-height:41px;
+	display:block;
+	float:left;
+	font-size:14px;
+}
+.control-group .smaller_control_unit{
+	height:26px;
+	line-height:26px;
+	display:block;
+	float:left;
+	font-size:14px;
+}
+.control-group a{
+	height:37px;
+	line-height:auto;
+}
+.field_select.bank_id dt , .field_select.otherbank dt{width:128px}
+.field_select.bank_id dd , .field_select.otherbank dd{width:155px;}
+</style>
+<form name="Jbank_From" class="ajax_form" id="Jbank_From" action="{url r="account#savebank"}" method="post">
+	<div class="form_row control-group">
+	    <label class="small_control_label">开户名：</label>
+	    <input type="text" readonly="readonly" name="real_name" id="Jbank_real_name" class="small_textbox readonly" style="width:100px;" value="{$user_info.identify_name}">
+	    <div class="blank0"></div>
+	</div>
+ 	<div class="form_row control-group">
+	    <label class="smaller_control_label">帐户类型：</label>
+	    <div class="smaller_control_cont">
+	    	借记卡&nbsp;&nbsp;<span class="f_red">(不支持信用卡)</span>
+	    </div>
+	    <div class="blank0"></div>
+	</div>
+	<div class="blank1"></div>
+ 	<div class="form_row control-group">
+	    <label class="small_control_label">
+	    	<span class="f_red b">*</span> 选择银行：
+	    </label>
+		<select name="bank_id" id="Jbank_bank_id" class="ui-select field_select small bank_id">
+			<option value="">请选择</option>
+			{foreach from=$bank_list.recommend item=item}
+			<option value="{$item.id}" day="{$item.day}">{$item.name}</option>
+			{/foreach}
+			<option value="other">其他</option>
+		</select>
+		<select name="otherbank" id="Jbank_otherbank" class="ui-select field_select small otherbank">
+			<option value="">请选择</option>
+			{foreach from="$bank_list.other" item="item"}
+			<option value="{$item.id}" day="{$item.day}">{$item.name}</option>
+			{/foreach}
+		</select>	
+	    <div class="blank0"></div>
+	</div>
+	<div class="form_row control-group">												
+		<label for="settings-region" class="small_control_label"><span class="f_red b">*</span> 开户行所在地：</label>
+		<select name="province" id="cityid-1" class="ui-select field_select small">
+			<option value="" rel="0">请选择省份</option>
+			{foreach from=$region_lv2 item=region}
+			<option value="{$region.name}" class="ld-option" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+			{/foreach}	
+		</select>
+		<select name="city" id="cityid-2" class="ui-select field_select small">
+			<option value="" rel="0">请选择城市</option>
+			{foreach from=$region_lv3 item=region}
+			<option class="ld-option" value="{$region.name}" rel="{$region.id}" {if $region.selected}selected="selected"{/if}>{$region.name}</option>
+			{/foreach}
+		</select>
+ 	</div>				
+	<div class="blank1"></div>		
+	<div class="form_row control-group">						
+		<label for="settings-bankzone" class="small_control_label"><span class="f_red b">*</span> 开户行网点：</label>
+		<input type="text" name="bankzone" id="Jbank_bankzone" class="small_textbox w250 mr10" value="">
+		<span class="control_unit">
+			<a href="http://www.cardbaobao.com/wangdian/" target="_blank">网点查询</a>
+		</span>
+		<div class="blank0"></div>	
+	</div>
+   	<div class="form_row control-group">
+       	<label class="small_control_label"><span class="f_red b">*</span> 银行卡号：</label>
+       	<input type="text" name="bankcard" class="small_textbox w250 b" id="Jbank_bankcard" value="">
+       	<div class="blank0"></div>
+   	</div>
+   	<div class="form_row control-group">
+       	<label class="small_control_label"><span class="f_red b">*</span> 确认卡号：</label>
+       	<input type="text" name="reBankcard" class="small_textbox w250" id="Jbank_rebankcard" value="">
+       	<div class="blank0"></div>
+   	</div>
+   	<div class="blank20"></div>
+	<div class="form_row control-group">
+		<label class="small_control_label"></label>
+		<input type="button" value="确认添加" class="ui-button theme_bgcolor mr10">
+		<input type="button" value="取消" class="ui_button bg_red cancel">
+		<input type="hidden" name="ajax" value="1">
+    </div>
+	<div class="blank20"></div>      
+</form>
+<script type="text/javascript">
+	$("#Jbank_bankcard,#Jbank_rebankcard").bankInput(); 
+ 	$(function(){
+		$("#Jbank_bank_id").bind("change",function(){
+			if($(this).val()=='other'){
+				$("dl.otherbank").show();
+			}else{
+				$("dl.otherbank").hide();
+			}
+		});
+		
+	});
+	$(".cancel").click(function(){
+		close_pop();
+	});
+</script>

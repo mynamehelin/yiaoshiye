@@ -1,0 +1,77 @@
+{include file="inc/header.html"}
+<style>
+    .field_select{margin-right:0}
+    .field_select dt{height:26px;line-height:26px}
+    .field_select dt i{top:12px;}
+    .banner {width: 100%;height: 353px;}
+    .banner.banner_cont {height: 100%;}
+	
+</style>
+<div class="banner slideBox" id="banner">
+  
+
+    <!--<div class="banner_cont effect_bd">
+        <ul>
+
+            <li><a href="#" target="_blank" style="display:block;background: url(/app/Tpl/fanwe_1/images/bann.jpg) 50% 50% no-repeat;"></a></a></li>
+
+        </ul>
+    </div>-->
+    <div class="btn_tit effect_hd">
+        {foreach from=$image_list item=image_item}
+        <span></span>
+        {/foreach}
+    </div>
+</div>
+<script type="text/javascript">
+    if(!$(".banner_cont ul").has('li').length){
+        $("#banner").css("display","none");
+    }
+
+    if($(".banner_cont ul").find('li').length==1){
+        $(".btn_tit").css("display","none");
+    }
+    else if($(".banner_cont ul").find('li').length>1){
+        $(".btn_tit").css("display","block");
+    }
+    if($(".banner_cont ul").find('li').length>1){
+        jQuery("#banner").slide({mainCell:".banner_cont ul",titCell:".effect_hd span",effect:"leftLoop",easing:"easeInOutQuint",delayTime:500,autoPlay:true});
+        $("#banner").mousemove(function(){
+            $(this).find(".prev").show();
+            $(this).find(".next").show();
+        }).mouseout(function(){
+            $(this).find(".prev").hide();
+            $(this).find(".next").hide();
+        });
+    }
+</script>
+<div class="bgimg" style="background: #fff5e7;">
+    <div class="wrap">
+        <div class="news_box">
+            <div class="location_box">
+            </div>
+            <div class="news_con">
+                <div class="news_left">
+                    <div class="lan">
+                        <div class="cn_txt">
+                            <span>{if $cate_name}{$cate_name}{else}文章列表{/if}</span>
+                        </div>
+                    </div>
+                    {foreach from=$artilce_list item=article_item}
+                    <!---->
+                    <div class="list_news">
+                        <h2><a href="{$article_item.url}" title="{$article_item.title}">{$article_item.title}</a></h2>
+                        <span style="float:right;margin-top: -18px;">{function name="to_date" v=$article_item.update_time p="Y-m-d"}</span>
+                    </div>
+                    {/foreach}
+                    <div class="blank20"></div>
+                    <div class="pages" style="width:100%;">{$pages}</div>
+                    <div class="blank20"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="inc/footer.html"}

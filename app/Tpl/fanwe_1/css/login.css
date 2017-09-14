@@ -1,0 +1,224 @@
+﻿@charset "utf-8";
+.login {
+  width: 350px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  margin-top:120px;
+}
+.login .login_box {
+  width: 350px;
+  margin: 0 auto;
+}
+.login .login_box .login_top {
+  width: 350px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #fff;
+}
+.login .login_box .login_top span {
+  font-size: 17px;
+  color: #fff;
+  padding-right: 210px;
+}
+.login .login_box .login_top a {
+  font-size: 12px;
+  color: #fe9807;
+}
+.login .login_box .login_inp {
+  
+  height: 45px;
+  line-height: 45px;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 5px;
+}
+.login .login_box .login_inp img {
+  margin-left: 12px;
+  vertical-align: middle;
+}
+.login .login_box .login_inp input {
+  width: 300px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+}
+.login .login_box .login_inp .login_btn {
+  width: 350px;
+  height: 45px;
+  line-height: 45px;
+  background: #ffae00;
+  font-size: 18px;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-family: "微软雅黑";
+  cursor: pointer;
+  border-radius: 5px;
+}
+.login .login_box .login_inp .login_btn:hover {
+  background: #fe9807;
+}
+.login .login_box .login_yzm {
+  margin-top: 20px;
+}
+.login .login_box .login_yzm .inp_d {
+  width: 60%;
+  height: 45px;
+  line-height: 45px;
+  background: #fff;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+  text-indent: 10px;
+}
+.login .login_box .login_yzm img {
+  width: 110px;
+  height: 45px;
+
+}
+.login .login_box .login_che {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  margin-top: 20px;
+}
+.login .login_box .login_che label {
+  margin-right: 170px;
+  font-size: 16px;
+  color: #fff;
+}
+.login .login_box .login_che label input {
+  vertical-align: middle;
+}
+.login .login_box .login_che a {
+  color: #0a68ff;
+  margin-left-15px;
+}
+.container {
+  width: 100%;
+  height: 600px;
+  background: url(../images/dl_bg.jpg) no-repeat 50% 50%;
+  position: relative;
+}
+.login {
+  width: 400px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  min-height: 450px;
+  position: absolute;
+  right: 10%;
+  top: 50px;
+}
+.login .login_box {
+  width: 100%;
+  margin: 0 auto;
+}
+.login .login_box .login_top2 {
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+}
+.login .login_box .login_top2 a {
+  color: #fff;
+  padding: 0 15px;
+}
+.login .login_box .login_top2 .login_top2_a {
+  color: #ffc30d;
+}
+.login .login_box .login_inp {
+  width: 350px;
+  height: 45px;
+  line-height: 45px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 5px;
+}
+.login .login_box .login_inp img {
+  margin-left: 12px;
+  vertical-align: middle;
+}
+.login .login_box .login_inp input {
+  width: 300px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+}
+.login .login_box .login_inp .login_btn {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background: #ffae00;
+  font-size: 18px;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-family: "微软雅黑";
+  cursor: pointer;
+  border-radius: 5px;
+}
+.login .login_box .login_inp .login_btn:hover {
+  background: #fe9807;
+}
+.login .login_box .login_yzm {
+  margin-top: 10px;
+  width:300px;
+}
+.login .login_box .login_yzm .inp_d {
+  width: 60%;
+  height: 45px;
+  line-height: 45px;
+  background: ;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #000;
+  border: 0;
+  outline: none;
+  text-indent: 40px;
+  background: url(../images/dl_4.png) no-repeat 12px center #ffffff;
+}
+.login .login_box .login_yzm img {
+  width: 110px;
+  height: 45px;
+
+}
+.login .login_box .login_yzm span {
+  display: inline-block;
+  *display: block;
+  width: 110px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 5px;
+  background: #ff624c;
+  text-align: center;
+  color: #fff;
+
+  cursor: pointer;
+}
+.login .login_box .login_che {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  margin-top: 10px;
+}
+.login .login_box .login_che label {
+  margin-right: 190px;
+  font-size: 16px;
+  color: #fff;
+}
+.login .login_box .login_che label input {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.login .login_box .login_che a {
+  color: #0a68ff;
+  margin-left:-15px;
+}
+.login .login_box .login_che .col_h {
+  color: #FE9807;
+}

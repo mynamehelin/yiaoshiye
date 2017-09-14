@@ -1,0 +1,146 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/account.css";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery-1.8.2.min.js";
+
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+
+
+{include file="inc/home_user_info.html"}
+<!--中间开始-->
+<div class="dlmain Myhomepage">
+ 	{include file="inc/account_left.html"} 
+ 	<div class="homeright pageright f_r">
+		<div class="account_money">
+				<div class="list_title clearfix">
+						<div {if $module eq 'account'&& $action eq 'money_inchange'}class="cur"{/if}>
+							<a href="{url r="account#money_inchange"}">线上充值</a>
+						</div>
+						<div {if $module eq 'account' && $action eq 'money_below'}class="cur"{/if}>
+							<a href="{url r="account#money_below"}">线下充值</a>
+						</div>
+						<div {if $module eq 'account'&& ($action eq 'record'||$action eq 'pay')}class="cur"{/if}>
+							<a href="{url r="account#record"}">充值日志</a>
+						</div>
+				</div>
+			<div class="page_info">
+				<div class="page_tips" style="line-height: 25px;color: #444e58;padding: 10px 0px; font-size: 14px;font-family: '微软雅黑';">
+					<p style="font-size: 14px;">请先按照以下提供的付款账号充值，在附言中备注您的平台用户名，充值成功后准确填写以下信息，账单流水号以付款银行提供的为准。</p>
+				</div>
+					<div class="m_page_right_box"style="display: table; color: #444e58; width: 100%;font-family: 微软雅黑;">
+						 <form class="pay_form" id="weichao" action="" target="_blank" method="post">
+							<table style="width: 850px; float: left;padding: 0px; border-collapse: collapse; text-align: left;" id="formTb" cellspacing="0" cellpadding="0">
+								<tbody>
+									<tr>
+										<td class="tdTitle" style="height: 45px; line-height: 45px; font-family: 微软雅黑;">充值金额：</td>
+										<td class="tdContent">
+											<input id="money_off" name="money_off" class="text_input" type="text" style="line-height: 24px; border: 1px solid #d7d8d8;height: 24px;">
+										</td>
+									</tr>
+									<tr>
+										<td class="tdTitle" style="height: 45px; line-height: 45px; font-family: 微软雅黑;">入帐银行：</td>
+										<td class="tdContent">
+											<select id="off_bank" name="off_bank" style="line-height: 24px; border: 1px solid #d7d8d8; height: 24px;">
+											<option value="中国建设银行聊城东城支行 卡号6217002280012285011张和">中国建设银行聊城东城支行 卡号6217002280012285011张和</option>
+											<option value=""></option>
+											</select>(指您往网站指定的哪个银行进行了汇款)
+										</td>
+									</tr>
+									<tr>
+										<td class="tdTitle" style="height: 45px; line-height: 45px; font-family: 微软雅黑;">账单流水号：</td>
+										<td class="tdContent" >
+											<input id="tran_id" name="tran_id" class="text_input" type="text"></td></tr>
+									<tr>
+										<td class="tdTitle" style="height: 45px; line-height: 45px; font-family: 微软雅黑;">充值方式：</td>
+										<td class="tdContent">
+											<input id="off_way" name="off_way" class="text_input" type="text">(如网银转账，柜台汇款,汇款人等)
+										</td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td>
+											<a href="javascript:void(0)" id="btn_set" onclick="ckoffline()" class="button_input" style="width:100px;">提交充值</a>
+										</td>
+									</tr>
+								</tbody>
+						</table>
+									<input type="hidden" id="back_url" value={$user_info.user_name}>	
+									<input type="hidden" id="user_id" value={$user_info.id}>
+									<input type="hidden" id="create_time" value="<?php echo NOW_TIME;?>">
+									<input type="hidden" id="notice_sn" value="<?php echo to_date(NOW_TIME,"Ymd").rand(100,999);?>">
+									
+								
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+ 	<!--中间结束-->
+	<div class="blank"></div>
+</div>
+<div class="blank"></div>
+<script type="text/javascript">
+
+	function ckoffline(){
+		var $money_off = $("#money_off").val();
+		var $tran_id = $("#tran_id").val();
+		var $off_way = $("#off_way").val();
+		var $off_bank = $("#off_bank").val();
+		var $uaername=$("#back_url").val();
+		
+		var $user_id = $("#user_id").val();
+		var $create_time = $("#create_time").val();
+		var $notice_sn=$("#notice_sn").val();
+		
+		if($money_off==''|| $money_off<=0){
+			$.showErr("请输入金额");
+			return false;
+		}
+		if($tran_id==''){
+			$.showErr("请输入流水号");
+			return false;
+		}
+		if($off_way==''){
+			$.showErr("请选择充值方式");
+			return false;
+		}
+$.post("/pay/apiewm.php",{"money_off":$money_off,"tran_id":$tran_id,"off_way":$off_way,"off_bank":$off_bank,"uaername":$uaername,"user_id":$user_id,"create_time":$create_time,"notice_sn":$notice_sn},function(data){
+	alert(data);
+	if(data=='1'){
+		
+		alert("提交成功,请等待管理员审核！！！");
+		window.location.href="http://www.yiaoshiye.com/index.php?ctl=account&act=record";
+	}else{
+		alert("提交失败");	
+	}
+})
+
+};
+
+	
+	
+
+
+		
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{include file="inc/footer.html"} 

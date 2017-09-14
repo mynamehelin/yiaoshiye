@@ -1,0 +1,156 @@
+<style>
+	.fileupload .filebox{ cursor:pointer; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity:0; opacity:0; padding:0; height:40px; width:97px; }
+	.control-group input.textbox { width:97px; }
+	.mod_lf{ width:60%; margin-right:5%; }
+	.chance_left h3{
+		height:30px;
+		line-height:30px;
+		color:#fff;
+		font-weight:normal;
+	}
+	.chance_left span{
+		width:148px;
+		height:40px;
+		line-height:40px;
+		border:1px solid #e3e3e3;
+		border-top:0;
+		display:block;
+	}
+	.control-group{height:auto;margin-left:0}
+	.control-group label{
+		height:33px;
+		line-height:33px;
+	}
+	.control-group .textbox{
+		padding:6px;
+	}
+	.chance_left{
+		width:150px;
+		top:10px;
+		right:0;
+		_right:20px;
+	}
+	.dialog-mask{opacity:0}
+</style>
+<div class="full pr">
+<form id="enquiry_two" action="{url r="investor#enquiry_save"}">
+	<div class="mod_hd f22 theme_fcolor tl">投资项目</div>
+	<div class="blank20"></div>
+	<div class="chance_left tc ps">
+		<h3 class="theme_bgcolor f14">该项目剩余询价机会</h3>
+		<span class="theme_fcolor f20">{$inquiry_num}次</span>
+	</div>
+	<div class="mod_bd">
+		<div class="form_row control-group">
+			<label class="f_l">项目估值：</label>
+			<div class="f_l">
+				<input type="text" placeholder="请输入金额" name="stock_value" id="stock_value" class="textbox f_l stock_value" value="" style="width:100px;margin-right:5px;" onkeyup="amount(this);" />
+				<span class="f_l" style="line-height:33px;">万元</span>
+			</div>
+		</div>
+		<div class="blank0"></div>
+		<div class="form_row control-group">
+			<label class="f_l">投资金额：</label>
+			<div class="f_l">
+				<input type="text" placeholder="请输入金额" name="money" id="money" class="textbox f_l money" value="" style="width:100px;margin-right:5px;" onkeyup="amount(this);" />
+				<span class="f_l mr10" style="line-height:33px;">万元</span>
+				<span class="f_red" style="line-height:33px;">*最低出资金额为0.01万元</span>
+				<input type="hidden" name="invote_mini_money" value="{$deal.invote_mini_money}" />
+			</div>
+		</div>
+		<div class="blank0"></div>
+		<div class="form_row control-group tl">
+			<label>投资理由：</label>
+			<div class="blank0"></div>
+			<div>
+				<textarea class="textareabox w400 f_l" placeholder="请输入内容" name="investment_reason" id="investment_reason" value="" style="height:60px"></textarea>
+			</div>
+		</div>
+		<div class="blank0"></div>
+		<div class="form_row control-group tl">
+			<label>我能为创业者提供非资金帮助：</label>
+			<div class="blank0"></div>
+			<div>
+				<textarea class="textareabox w400 f_l" placeholder="请输入内容" name="funding_to_help" id="funding_to_help" value="" style="height:60px"></textarea>
+			</div>
+		</div>
+		<div class="blank20"></div>
+		<label class="ui_checkbox mr10" rel="is_partner">
+			<input type="checkbox" name="is_partner" checked="checked" value="1" />是否愿意担任有限合伙企业普通合伙人
+		</label>
+	</div>
+	<div class="blank20"></div>
+	<div class="submit_btn_row tc">
+		<span class="ui-center-button theme_bgcolor mr10 button_y" rel="green">提交</span>
+		<span class="ui-center-button bg_red button_n" rel="green">取消</span>
+		<input type="hidden" value="1" name="ajax" />
+		<input type="hidden" value="{$deal_id}" name="deal_id" id="deal_id"/>
+		<input type="hidden" value="{$user_id}" name="user_id" id="user_id"/>
+	</div>
+	<div class="blank5"></div>
+</form>
+</div>
+<script type="text/javascript">
+//筛选
+$(function(){
+	ui_checkbox();
+	enquiry_save();
+
+	$(".button_n").click(function(){
+		$.weeboxs.close();
+	});
+});
+//询价信息入库
+function enquiry_save(){
+	$("#enquiry_two .button_y").bind("click",function(){
+		if($("#stock_value").val()==''){
+			$.showErr("项目估值不能为空！");
+			return false;
+		}
+		if((isNaN($(".stock_value").val())||parseFloat($(".stock_value").val())<=0)||$(".stock_value").val()=='')
+		{
+			$.showErr("请输入正确的估值金额");
+			return false;
+		}
+		if((isNaN($(".money").val())||parseFloat($(".money").val())<=0)||$(".money").val()=='')
+		{
+			$.showErr("请输入正确的投资金额");
+			return false;
+		}
+		if($("#investment_reason").val()==''){
+			$.showErr("投资理由不能为空！");
+			return false;
+		}
+		if($("#funding_to_help").val()==''){
+			$.showErr("资金帮助不能为空！");
+			return false;
+		}
+		if(!($("input[name='is_partner']").attr("checked")))
+		{
+			$.showErr("请选择愿意担任！");
+			return false;
+		}
+		var ajaxurl = $("#enquiry_two").attr("action");
+		var query = $("#enquiry_two").serialize();
+		//alert(query);
+		$.ajax({
+			url: ajaxurl,
+			dataType: "json",
+			data:query,
+			type: "POST",
+			success:function(ajaxobj){
+				if(ajaxobj.status==0){
+					$.showErr(ajaxobj.info);
+					return false;
+				}
+				if(ajaxobj.status==1){
+					$.showSuccess(ajaxobj.info,function(){
+						location.reload();
+					});
+				}
+				 
+			}
+		});
+	});
+}
+</script>

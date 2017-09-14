@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>提示信息</title><style type="text/css">  *{margin:0; padding:0;}
+  body{font-size:12px; color:#000; background:#D5D2D2; font-style:normal !important;}
+  img{border:none;}
+  a{text-decoration:none; color:#000;}
+  a:hover{text-decoration:none; color:#000;}
+  li{list-style:none;}
+  .sucess{width:670px; height:145px; margin:0 auto; position:absolute; left:50%; top:150px; margin-left:-302px;border-top: 8px solid #00886C;background: #fff}
+  .spec1{ text-align:right;  position:relative;height: 22px}
+  .spec1 a{ position:absolute; top:5px; right:5px; height:22px; width:22px; display:block;}
+  .spec2{font-size:18px; font-family:微软雅黑; color:#00886C; text-align:left; padding-top:10px; padding-bottom:10px; /* font-weight:bold; */}
+  .spec3{font-size:16px; color:#4d4a4a; text-align:left; font-family:微软雅黑;}
+  .spec3 a{color:#00886C;}
+  .spec3 span{color:#00886C;}
+  .shibai .spec3 a{color:#EC6434;}
+  .shibai .spec3 span{color:#EC6434;}
+  .shibai{border-top: 8px solid #EC6434;}
+  .shibai .spec2{color: #EC6434}
+  .spec4{font-size:24px; font-family:微软雅黑; color:#a2292b; text-align:center; padding-top:20px; padding-bottom:20px;/* font-weight:bold; */}
+  .tip_left{float: left;width: 100px;text-align: right;}
+  .tip_right{float: left;width: 500px;padding: 0px 20px 0px 30px}
+  .tip_img{width: 48px;height: 48px;margin: 0px auto;margin-top: 20px;}
+  #time{padding: 0px 2px;}
+</style><base target="_self" /></head><body><div class="sucess png shibai"><p class="spec1"><a href="/"><img src="/Style/tip/images/gb.png" class="png" /></a></p><div class="tip_left"><img src="/Style/tip/images/tip_img_f.png" class="tip_img"></div><div class="tip_right"><p class="spec2">Empty Action<BR>非法操作，请与管理员联系</p><p class="spec3">系统将在<span id="time">3</span>秒后跳转，如果不想等待，直接点击<a href="/">这里</a>跳转</p></div></div><script>function countDown(secs,surl){         
+    var time = document.getElementById('time');
+    time.innerHTML=secs;  
+    if(--secs>0){     
+        setTimeout("countDown("+secs+",'"+surl+"')",1000);     
+    }else{            
+      if(window.history.length<2){
+        surl = '/';
+      }
+      location.href=surl;     
+    }     
+}     
+countDown(3,'/');
+</script></body></html>

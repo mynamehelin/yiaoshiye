@@ -1,0 +1,57 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<div class="main">
+<div class="main_title">{%EDIT} <a href="{:u("PaymentBelow/index")}" class="back_list">{%BACK_LIST}</a></div>
+<div class="blank5"></div>
+<form name="edit"  action="" target="_parent " method="post">
+<table class="form" cellpadding=0 cellspacing=0>
+	<tr>
+		<td colspan=2 class="topTd"></td>
+	</tr>
+	<tr>
+		<td class="item_title">充值审核</td>
+		<td class="tdContent">
+			<select id="off_bank" name="off_bank" style="line-height: 24px; border: 1px solid #d7d8d8; height: 24px;">
+			<option value="ok">通过</option>
+			<option value="no">驳回</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title"></td>
+		<td class="item_input">
+			<input type="submit" onclick="ckoffline()" class="button" value="提交" />
+		</td>
+	</tr>
+</table>
+<input type="hidden" id="back_url" value={:trim($_REQUEST['id'])}>	 
+</form>
+</div>
+
+
+<script type="text/javascript">
+
+	function ckoffline(){
+		var $id=$("#back_url").val();
+		var $is=$("#off_bank").val();
+		if($is=='ok'){
+				$.post("/pay/upd.php",{"id":$id},function(data){
+				if(data=='1'){
+						alert("审核成功");
+						window.location.href="http://www.yiaoshiye.com/m.php?m=PaymentBelow&a=index&";
+					}else{
+						alert("审核失败");
+				
+					}
+				})
+		}else{
+			window.location.href="http://www.yiaoshiye.com/m.php?m=PaymentBelow&a=index&";
+		}
+	
+
+};
+</script>
+
+
+<include file="Public:footer" />

@@ -1,0 +1,336 @@
+@charset "utf-8";
+body{
+	background:#f5f5f5;
+}
+.money_box{ border:#d8d8d8 solid 1px; margin:10px; padding:20px; background:#fafafa;}
+.money_box .recharge , .money_box .withdraw { margin-right:5px; color:#fff; background:#00b0f5; height:32px; line-height:32px; padding:0 20px; display:inline-block; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; }
+.money_box .recharge:hover , .money_box .withdraw:hover { color:#fff; }
+.money_box .withdraw { background:#3bc737; }
+.credit_box{ font-size:20px; font-family:"微软雅黑"; }
+.price{ color:#ED5F59; }
+.incharge_tip{ font-size:14px; color:#666; overflow:hidden; }
+.incharge_tip a{ color:#12ADFF; font-weight:bolder; text-decoration:none;}
+.incharge_tip a:hover{ color:#12ADFF; font-weight:bolder; text-decoration:none; }
+.cancel_incharge{ line-height:40px; padding-left:10px; float:left;  font-size:12px; color:#12adff; text-decoration:none;}
+
+.pay_tip_box{ font-size:14px; padding:5px 10px;}
+.choose{ font-size:12px; }
+
+.data-table .data-title{ width:48px; background:#f5f5f5; font-weight:bolder;  text-align:right; }
+.data-table .data-split{ height:1px; _height:2px; *height:2px; font-size:0; line-height:0px; padding:0px; }
+.data-table .tl{ text-align:left;}
+
+.repay_memo{ width:400px; min-width:400px; max-width:400px; float:left;  border:#ccc solid 1px; height:100px; padding:5px; color:#666; font-size:14px; line-height:18px; border-radius:3px; min-height:60px; max-height:60px; }
+.set_repay{ float:left; display:inline-block; margin-top:20px; }
+.repay_tip{ color:#ccc;}
+
+.order_table td,.order_table th{ padding:10px 10px;}
+
+#left_time{ color:red;}
+.ui-btn-m a {
+text-decoration: none;
+}
+.btn_creat{ height:30px; font-size:14px; line-height:30px; padding:0 15px; background:#f19807; color:#fff; display:inline-block; -moz-border-radius:3px; -khtml-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;  }
+.btn_creat:hover{ color:#fff; }
+.empty_tip{
+	padding:20px 0;
+	text-align:center;
+	font-size:14px;
+}
+
+/* 切换标题栏 开始 */
+.list_title {
+	border-left:1px solid #eee;
+	border-bottom:2px solid #eee;
+	color: #494949;
+	font-size: 12px;
+	font-family: "Microsoft YaHei";
+	height: 41px;
+	line-height: 40px;
+	margin-bottom:20px;
+}
+.list_title div {
+	background-color: #fff;
+	border:1px solid #eee;
+	border-left:0;
+	border-bottom:0;
+	float: left;
+	font-size:14px;
+	padding: 0 25px;
+	cursor: pointer;
+}
+.list_title .cur{}
+.list_title div a {color: #555;}
+.list_title .cur , .list_title .cur a{color:#333;}
+/* 切换标题栏 结束 */
+
+/* 会员中心搜索 开始 */
+.account_search{
+	overflow:hidden;
+}
+.account_search .small_form_lable{
+	width:65px;
+	margin-right:10px;
+}
+.account_search .small_form_lable,
+.account_search .small_form_text{
+	font:12px/24px 'SimSun' !important;
+	height:24px;
+	float:left;
+}
+.account_search .small_textbox{
+	font:12px 'SimSun' !important;
+	padding:4px;
+	-moz-border-radius:0; -khtml-border-radius:0; -webkit-border-radius:0; border-radius:0;
+}
+.account_search .jcDateIco{
+	background-position:89px center;
+}
+.account_search .holder_tip{
+	top:0;
+	left:0;
+	width:86px;
+	height:24px;
+	font:12px/24px 'SimSun' !important;
+}
+.account_search .field_select dt{
+	height:22px;
+	font:12px/24px 'SimSun' !important;
+	padding:0 17px 0 10px;
+}
+.account_search .field_select dt i{
+	top:10px;
+}
+.account_search .ui-button{
+	border:0;
+	height:24px;
+	line-height:24px;
+	font:12px/24px 'SimSun' !important;
+	margin: 5px 0 15px 0;
+	-moz-border-radius:0; -khtml-border-radius:0; -webkit-border-radius:0; border-radius:0;
+}
+.account_search #more_search{
+	display:none;
+}
+.account_search .more_search_btn{
+	height:24px;
+	font:12px/24px 'SimSun' !important;
+	display:inline;
+	float:left;
+	margin:5px 0 15px 20px;
+}
+.account_search .more_search_btn .iconfont_up{
+	display:none;
+}
+/* 会员中心搜索 结束 */
+
+/* account_money 开始 */
+.account_money .money_box{
+	margin:0;
+}
+.account_money .t_name {
+	color: #666;
+	font-size: 14px;
+	font-weight: bold;
+}
+.account_money .item_group {
+	height: 30px;
+	line-height: 30px;
+	margin: 0 auto;
+}
+.account_money .item_bank {
+	width: 224px;
+	height: 130px;
+	text-align: left;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	float: left;
+	margin: 10px 7px 20px 20px;
+	margin-right: 7px;
+	display: inline;
+	cursor: pointer;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 3px 3px 3px #ebebed;
+}
+.account_money .item_bank .tip {
+	padding: 5px 10px;
+	text-align: center;
+	border-bottom: 1px dashed #ccc;
+}
+.account_money .item_bank .edit_card {
+	text-align: center;
+	padding-top: 5px;
+}
+.account_money .add_bank {margin-right: 0;}
+.account_money .add_bank p {font: 16px/24px "simsun";}
+/* account_money 结束 */
+
+/* 添加银行卡 开始 */
+.#Jbank_From .field {
+	line-height: 30px;
+	font-size: 12px;
+	margin: 5px auto 5px;
+}
+#Jbank_From .field label {
+width: 130px;
+}
+#Jbank_From .field input.f-input {
+height: 20px;
+line-height: 20px;
+padding: 5px;
+}
+.field .f-input {
+float: left;
+}
+.readonly {
+background: #f1f1f1;
+}
+/* 添加银行卡 结束 */
+
+/* 提现 开始 */
+.account_money_carry .control-group{margin-left:0;}
+.account_money_carry .form_lable{
+	width:200px;
+}
+.account_money_carry .total{border-bottom:1px dashed #e3e3e3;}
+.account_money_carry .prompt {
+	width:auto;
+	border-bottom: 1px dashed #e3e3e3;
+}
+.account_money_carry p {
+	color: #666;
+	font-size: 14px;
+	line-height:24px;
+	padding:6px 0;
+}
+.account_money_carry i {
+	background: url(../images/prompt.gif) no-repeat;
+	display: inline-block;
+	height: 5px;
+	margin: 9px 10px 0 0;
+	_margin-top: 4px;
+	vertical-align: top;
+	width: 5px;
+}
+.account_money_carry p.f_red {color:#ff5500;}
+/* 提现 结束 */
+
+/* 放款记录 开始 */
+.account_paid .deal_name_title{
+	width:450px;
+	height:58px;
+	line-height:58px;
+	padding:0 20px;
+	float:left;
+	color:#fff;
+}
+/* 放款记录 结束 */
+
+/* 资金记录 开始 */
+.account_credit .opt{
+	height:24px;
+	line-height:24px;
+	padding:0 10px;
+	float:left;
+	display:inline;
+}
+.account_credit .opt.cur{
+	color:#fff;
+}
+.account_credit .ui-button{
+	margin-left:10px;
+	display:inline;
+}
+.account_credit .uc_table .deal_name ,
+.account_index .uc_table .deal_name {
+	padding-left:20px;
+}
+/* 资金记录 结束 */
+
+/* 回报信息 开始 */
+.account_view_order .deal_name{
+	color:#fff;
+}
+.account_view_order .uc_table .deal_name{
+	border-bottom:1px solid #fff;
+}
+/* 回报信息 结束 */
+/* view_order */
+.order_table td { font-size:14px; }
+.order_table td.deal_name { text-align:center }
+.money_box{margin:20px;}
+.full{padding:20px;}
+.title{font-size:18px}
+.control-group{margin-left:0}
+.control-group label{width:auto;}
+.control-group a{height:37px;line-height:37px;}
+.ui-small-center-button{font-size:12px;}
+.pay_all{padding:10px 0px;font-size:14px;line-height:24px;}
+.pay_branch {display:none}
+/* view_order */
+
+/* invest_choice_btn 开始 */
+.invest_choice_btn{
+	width:472px;
+	height:60px;
+	line-height:60px;
+	float:left;
+	overflow:hidden;
+	text-align:center;
+	background:#fafafa;
+	font-size:16px;
+	font-weight:bold;
+	border-bottom:1px solid #e3e3e3;
+}
+.invest_choice_btn.cur{
+  	position:relative;
+	background:#fff;
+	margin-top:-6px;
+	height:65px;
+	line-height:65px;
+	border-left:1px solid #e3e3e3;
+ 	-webkit-box-shadow:3px -3px 3px #e5e5e5;  
+  	-moz-box-shadow:3px -3px 3px #e5e5e5  
+  	box-shadow:3px -3px 3px #e5e5e5;
+}
+.invest_choice_btn.cur_right{
+	border-right:1px solid #e3e3e3;
+ 	-webkit-box-shadow:-3px -3px 3px #e5e5e5;  
+  	-moz-box-shadow:-3px -3px 3px #e5e5e5  
+  	box-shadow:-3px -3px 3px #e5e5e5;
+}
+#tran_id{
+	line-height: 24px; 
+	border: 1px solid #d7d8d8; 
+	height: 24px;
+	
+}
+#off_way{
+	line-height: 24px; 
+	border: 1px solid #d7d8d8; 
+	height: 24px;
+	
+}
+
+
+
+#btn_set:hover {
+    background: #fd5252;
+    font-size: 16px;
+    padding: 4px 15px;
+    font-family: 微软雅黑;
+    color: #fff;
+}
+
+.button_input{
+	color: #fff;
+    background: #fd5252;
+    font-size: 16px;
+    padding: 4px 15px;
+    font-family: 微软雅黑;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+}
+/* invest_choice_btn 结束 */

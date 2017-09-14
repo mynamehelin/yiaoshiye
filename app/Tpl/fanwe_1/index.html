@@ -1,0 +1,758 @@
+{include file="inc/header.html"}
+<?php
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/countUp.min.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/countUp.min.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/swiper.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/jquery.SuperSlide.2.1.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/fanwe_utils/jquery.SuperSlide.2.1.js";
+
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/ajax_user_login.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/ajax_user_login.js";
+
+?>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<style type="text/css">
+
+	.nav_item1 .ui-progress,.nav_item1 .ui-success{height:12px;}
+	.nav_item1 .ui-progress span,.ui-success span{height:12px;line-height:12px;font-size:12px;color:#fff;text-align:right;}
+	#pin_box{margin-top:10px; }
+	.nav_item .nav_item1 .nav_item2{ cursor:pointer;}
+	.item_info .mask_text .item_title.other_info .every_info em {display: inline-block;width: 100%;text-align: center;}
+	.item_info{bottom: -55px; width: 288px;height: 86px;}
+	.item_info:hover{bottom:0;}
+	.f_sharing{display: block;left: 0;bottom: 0;z-index: 1;height:20px;width:54px;line-height:22px;font-size:12px;background: #f93030;color:#fff;text-align: center;}
+	.f_succee{display: block;left: 0;bottom: 0;z-index: 1;height:20px;width:54px;line-height:22px;font-size:12px;background:#f98530;color:#fff;text-align: center;}
+
+.nav_item{padding-top:10px;margin:0 16px 15px 0;}
+.nav_item:nth-child(4n+0){margin:0 0 16px 0;}
+    #pin_box{margin-top:-20px;}
+	.clear{height:143px;}
+	
+
+</style>
+<script> 
+
+$(document).keydown(function (event) {
+if (event.keyCode == 13) {
+$("#btn_do_login").click();
+}
+});
+
+ </script>
+<!--
+..item_info { bottom: -55px; width: 288px;height: 86px;}
+	..mask_text {position: absolute;z-index: 99;width: 100%;height: 100%;}
+	..item_title {padding: 8px 15px;display: block; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;}
+	..other_info {width: 288px;height: 46px;}
+	..other_info .every_info em.info_num {font-size: 14px;font-family: Verdana;line-height: 14px;}
+	..other_info .every_info em.info_name { font-size: 12px;line-height: 12px;font-family: "SimSun";margin-top: 7px;}
+
+-->
+<!--  海报区域开始  -->
+
+
+
+		<div class="banner slideBox" id="banner" style="height:730px; ">
+	<div class="banner_cont effect_bd" style="height:730px;">
+		<ul style="height:730px">
+			{foreach from=$image_list item=image_item}
+			<li style="height:730px"><a href="#" target=_blank style="display:block;background: url({$image_item.image})50% 50%; no-repeat;height:730px;"></a></li>
+			{/foreach}
+		</ul>
+	</div>
+	<div class="btn_tit effect_hd">
+		{foreach from=$image_list item=image_item}
+		<span></span>
+		{/foreach}
+	</div>
+	<div class="fy_box" style="">
+		<!--左右翻页按钮，可以不用-->
+		<a class="prev" href="javascript:void(0)"></a>
+		<a class="next" href="javascript:void(0)"></a>
+	</div>
+</div>
+<script type="text/javascript">
+	if(!$(".banner_cont ul").has('li').length){
+		$("#banner").css("display","none");
+	}
+
+	if($(".banner_cont ul").find('li').length==1){
+		$(".btn_tit").css("display","none");
+	}
+	else if($(".banner_cont ul").find('li').length>1){
+		$(".btn_tit").css("display","block");
+	}
+	if($(".banner_cont ul").find('li').length>1){
+		jQuery("#banner").slide({mainCell:".banner_cont ul",titCell:".effect_hd span",effect:"leftLoop",easing:"easeInOutQuint",delayTime:500,autoPlay:true});
+		$("#banner").mousemove(function(){
+			$(this).find(".prev").show();
+			$(this).find(".next").show();
+		}).mouseout(function(){
+			$(this).find(".prev").hide();
+			$(this).find(".next").hide();
+		});
+	}
+</script>
+
+
+
+<!--  海报区域结束  -->
+<!--登录注册开始-->
+
+<?php
+    if($_SESSION['fanweuser_info']['user_name']){
+?>
+
+<?php
+}else{
+?>
+<div class="login" style="margin-top:120px;right:5%;width:350px;background: rgba(0, 0, 0, 0.4)">
+	<div class="login_box">
+		<form id="user_login_form" name="user_login_form" action="{url r="user#do_login"}">
+		<div class="login_top">
+			<span style="padding-right:174px;">用户登录</span>
+			<a  href="{url r="user#register"}" style="font-size:16px;">注册新用户</a>
+		</div>
+		<div class="login_inp">
+			<img src="app/Tpl/fanwe_1/images/dl_1.png"/>
+			<input type="text" name="email" id="email" value="" placeholder="用户名"/>
+		</div>
+		<div class="login_inp">
+			<img src="app/Tpl/fanwe_1/images/dl_1.png"/>
+			<input type="password" name="user_pwd"   placeholder="请输入密码"/>
+		</div>
+		<div class="login_yzm" style="margin-right:75px;">
+			<input class="inp_d" type="text" name="adm_verify"  id="adm_verify" value="" placeholder="请输入验证码"/>
+			<img src="/verify.php"  id="verify" align="absmiddle"/>
+		</div>
+		<div class="login_che">
+			<label><input type="checkbox" name="" id="" value="" checked />记住密码</label>
+			<a href="{url r="user#getpassword"}" style="color:#fff">忘记密码？</a>
+		</div>
+		<div class="login_inp">
+			<input type="button" value="登录" name="submit_form" class="btn_do_login login_btn" id="btn_do_login" />
+			<input type="hidden" value="1" name="ajax" />
+			<div class="blank15"></div>
+		</div>
+		</form>
+	</div>
+</div>
+<?php
+}
+?>
+
+
+
+<!--登录注册结束-->
+<div class="adv_index">
+	<adv adv_id="index_top" />
+</div>
+
+<!-- 统计模块 结束 -->
+<!-- 专题推荐 开始 -->
+<div class="index_m index_recommend" style="background:#fff5e7;">
+<div class="index_sum">
+	<ul class="sum_wrap">
+		<li class="cont_pr sum_money">
+			<i></i>
+			<span id="sum_money">{$virtual_money}</span>累计交易金额
+			<input type="hidden" name="sum_money" value="{$virtual_money}" />
+		</li>
+		<li class="cont_pr sum_success">
+			<i></i>
+			<span id="sum_success">{$success_sum}</span>完成项目
+			<input type="hidden" name="success_sum" value="{$success_sum}" />
+		</li>
+		<li class="cont_pr sum_online">
+			<i></i>
+			<span id="sum_online">{$virtual_effect}</span>在线项目
+			<input type="hidden" name="sum_online" value="{$virtual_effect}" />
+		</li>
+		<li class="cont_pr sum_user">
+			<i></i>
+			<span id="sum_user">{$register_sum}</span>累计注册人数
+			<input type="hidden" name="sum_user" value="{$register_sum}" />
+		</li>
+	</ul>
+</div>
+	<div class="wrap">
+		<div class="recommend1 hide">
+			<a href="" target="_blank"><img src="{$TMPL}/images/index_re1.jpg" /></a>
+			<a href="" target="_blank"><img src="{$TMPL}/images/index_re1.jpg" /></a>
+			<a href="" target="_blank"><img src="{$TMPL}/images/index_re1.jpg" /></a>
+			<a href="" target="_blank" class="last"><img src="{$TMPL}/images/index_re1.jpg" /></a>
+		</div>
+		<div class="recommend2">
+
+			<script type="text/javascript">
+				jQuery("#special_effect").slide({titCell:".special_hd ul",mainCell:".special_list ul",autoPage:true,effect:"left",autoPlay:false,vis:1,trigger:"click",easing:"easeOutBack",delayTime:500});
+			</script>
+	<!--
+		<div class="project_com_tit clear" style="color: #feb106;width: 250px;font-size: 28px;height: 65px;line-height: 65px;text-align: center;margin: 0 auto;border: 2px solid #acdddd;border-radius: 10px;">
+
+		众筹项目
+
+		</div>
+		-->
+				<div class="project_com_tit clear">
+					<img src="{$TMPL}/images/text_2.png"  style="margin:30px auto 60px;"/>
+				</div>
+		<!---->
+		<div id="pin_box" style="margin-top:-30px;">
+		  {foreach from=$deal_recommend_list item=deal_recommend_item name=deal_recommend}
+			  {if $smarty.foreach.deal_recommend.iteration lte 3}
+		   <div class="recommend_box " style="width:357px; margin-left:25px;height:391px;padding: 10px 0;margin-bottom: 20px;margin-top: 29px;border:4px solid #feb006;float: left;">
+				<div class="recommend_right recommend_m f_l" style="width:357px;float: left; margin-top:-10px;">
+					<ul>
+						<li class="{if $smarty.foreach.deal_recommend.iteration mod 1 eq 0}last {/if}{if $smarty.foreach.deal_recommend.iteration mod 2 eq 0 || $smarty.foreach.deal_recommend.iteration mod 2 eq 0}{/if}">
+							<a href="{url r="deal#show" p="id=$deal_recommend_item.id"}" target="_blank">
+								<img src="{if $deal_recommend_item.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_recommend_item.image w="350" h="285" g="1"}{/if}" alt="{$deal_recommend_item.name}" lazy="true"/>
+							</a>
+						</li>
+					</ul>
+				</div>
+			   <div class="recommend_box_l">
+					<div class="recommend_box_lintro" style="width:357px;">
+                        <span style="width: 96%;font-size: 16px">{function name="msubstr" v=$deal_recommend_item.name b=0 e=25}</span>
+						<span>众筹金额：<em>{function name="round" v=$deal_recommend_item.support_amount e=2}</em>元</span>
+						<span>众筹金额：<em>{function name="round" v=$deal_recommend_item.limit_price e=2}</em>元</span>
+					</div>
+					<div class="progress_barcx clear" style="width:75%;margin-left:-9px;margin-top:10px;">
+						<div class="ui_progress">
+							<span class="bg_orange" style="width:{$deal_recommend_item.percent}%"></span>
+						</div>
+						<span class="progress_bar_num">{$deal_recommend_item.percent}%</span>
+					</div>
+					<div class="recommend_box_l_time" style="margin:-108px -3px">
+						最后时间：<span>{$deal_recommend_item.remain_days}</span> 天
+					</div>
+					<a style="margin-top:77px;" class="recommend_box_l_btn" href="{url r="deal#show" p="id=$deal_recommend_item.id"}">立即参与</a>
+			   </div>
+		   </div>
+	   {/if}
+	  {/foreach}
+		</div>
+	</div>
+</div>
+<!-- 专题推荐 结束 -->
+
+<!-- 最新创意 开始 -->
+<!--
+
+<div class="index_m index_new">
+	<div class="wrap">
+	<div class="project_com_tit clear"><img src="{$TMPL}/images/text_12.png"  style="margin:30px auto 60px;"/></div>
+		<div id="pin_box">
+			{foreach from=$deal_cart_list name=deal_cart_lists item=cart_pos }
+			{if $smarty.foreach.cart_pos.iteration lte 4}
+
+			<div class="nav_item{if $smarty.foreach.deal_cart_list.iteration mod 4 eq 1} first{/if}">
+
+				<a href="{url r="deal#show" p="id=$cart_pos.id"}" target="_blank">
+				<div class="project_image">
+					<img src="{if $cart_pos.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$cart_pos.image w="285" h="200" g="1"}{/if}" alt="{$deal_cart_list.name}" lazy="true" />
+
+					&lt;!&ndash;状态&ndash;&gt;
+					{if $cart_pos.type eq 0}
+					{if $cart_pos.begin_time > $now}
+					<span class="project_step project_begin">预热中</span>
+					{elseif $cart_pos.issharing eq 1}
+					<span {if $cart_pos.issharing eq 1}class="project_step project_success"{else}class="project_step project_fail"{/if}>{if $cart_pos.issharing eq 1}已分红{else}已成功{/if}</span>
+					{else}
+					{if $cart_pos.percent gte 100}
+					<span class="project_step project_fail">已成功</span>
+					{else}
+					<span class="project_step project_sprite">
+							{if $cart_pos.end_time eq 0}
+							长期项目
+							{else}
+								{if $cart_pos.type eq 1}
+								融资中
+								{else}
+								众筹中
+								{/if}
+		 					{/if}
+						</span>
+					{/if}
+					{/if}
+					{/if}
+				</div>
+				<div class="project_text">
+					&lt;!&ndash;项目名称&ndash;&gt;
+					<span class="project_title">{function name="msubstr" v=$cart_pos.name b=0 e=25}</span>
+					<div class="project_schedule">
+						{if $cart_pos.begin_time > $now}
+
+						{else}
+						&lt;!&ndash;money&ndash;&gt;
+						<div class="div3 div3_middle">
+
+							{if $cart_pos.type eq 1}
+							<span class="til">已预购</span>
+							{else}
+							<span class="til">已众筹:</span>
+							{/if}
+							<span class="num"><font>{function name="round" v=$cart_pos.support_amount e=2}</font>元</span>
+						</div>
+
+						&lt;!&ndash;title&ndash;&gt;
+						<div class="div3 div3_last">
+					<span class="til">
+						{if $cart_pos.begin_time > $now}
+							已经预热
+						{elseif ($cart_pos.end_time < $now and $deal_cart_list.end_time neq 0) }
+							结束时间
+						{else}
+							{if $cart_pos.end_time eq 0}
+								长期项目
+							{else}
+								剩余时间:
+							{/if}
+						{/if}
+					</span>
+							{$cart_pos.left_begin_days}
+							{if $cart_poseal_cart_list.begin_time > $now}
+							<span class="num" ><font>{$cart_pos.left_begin_days}</font>天</span>
+							{elseif $cart_pos.end_time < $now and $cart_pos.end_time neq 0}
+							<span class="num" >{function name="to_date" v="$cart_pos.end_time" f="y/m/d"}</span>
+							{else}
+							<span class="num">
+						{if $cart_pos.end_time eq 0}
+						长期项目
+						{else}
+						<font>{$cart_pos.remain_days}</font>天
+						{/if}
+					</span>
+							{/if}
+						</div>
+
+						{/if}
+						<span class="f_l"style="margin-top: 3px;margin-left: 2px;">众筹额：<em class="f_red"><i class="font-yen">¥</i>{function name="round" v=$cart_pos.limit_price e=2}</em></span>
+					</div>
+
+				</div>
+				</a>
+
+			</div>
+			{/if}
+			{/foreach}
+	</div>
+ </div>-->
+
+<!-- 最新创意 结束 -->
+<!-- 热门投资 开始
+<div class="index_m index_hot">
+	<div class="wrap">
+		<h3 class="index_title">
+		 	<span>|&nbsp;有你，有我，有梦想</span>
+		 	{if app_conf('INVEST_STATUS') eq 0 || app_conf('INVEST_STATUS') eq 1 }
+ 			 	<a href="{url r="deals" p="focus=1"}" target="_blank" class="more_browse f_r">查看更多</a>
+			 {else}
+				<a href="{url r="deals"  p="type=1&focus=1"}" target="_blank" class="more_browse f_r">查看更多</a>
+			 {/if}
+			<div class="blank0"></div>
+		</h3>
+		<div id="pin_box">
+		 	{if app_conf('INVEST_STATUS') eq 0 || app_conf('INVEST_STATUS') eq 2}
+			 	{include file="inc/deal_list_invest_hot_invest.html"}
+	 		{else}
+	 			{include file="inc/deal_list_index_hot_pro.html"}
+		 	{/if}
+		</div>
+	</div>
+ </div>-->
+<!-- 热门投资 结束 -->
+<!-- 新增商砼众筹项目    开始-->
+<div class="index_m index_new">
+	<div class="wrap">
+		<div class="project_com_tit clear"><img src="{$TMPL}/images/text_11.png"  style="margin:30px auto 60px;"/></div>
+		<div id="pin_box">
+
+			{foreach from=$deal_st_list name=deal_st_list item=st_pos }
+			{if $smarty.foreach.st_pos.iteration lte 4}
+
+			<div class="nav_item{if $smarty.foreach.deal_cart_list_result.iteration mod 4 eq 1} first{/if}">
+
+				<a href="{url r="deal#show" p="id=$st_pos.id"}" target="_blank">
+				<div class="project_image">
+					<img src="{if $st_pos.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$st_pos.image w="285" h="200" g="1"}{/if}" alt="{$st_pos.name}" lazy="true" />
+
+					<!--状态-->
+					{if $st_pos.type eq 0}
+					{if $st_pos.begin_time > $now}
+					<span class="project_step project_begin">预热中</span>
+					{elseif $st_pos.issharing eq 1}
+					<span {if $st_pos.issharing eq 1}class="project_step project_success"{else}class="project_step project_fail"{/if}>{if $st_pos.issharing eq 1}已分红{else}已成功{/if}</span>
+					{else}
+					{if $st_pos.percent gte 100}
+					<span class="project_step project_fail">已成功</span>
+					{else}
+					<span class="project_step project_sprite">
+							{if $st_pos.end_time eq 0}
+							长期项目
+							{else}
+								{if $st_pos.type eq 1}
+								融资中
+								{else}
+								众筹中
+								{/if}
+		 					{/if}
+						</span>
+					{/if}
+					{/if}
+					{/if}
+				</div>
+				<div class="project_text">
+					<!--项目名称-->
+					<span class="project_title">{function name="msubstr" v=$st_pos.name b=0 e=25}</span>
+					<div class="project_schedule">
+						{if $st_pos.begin_time > $now}
+
+						{else}
+						<!--money-->
+						<div class="div3 div3_middle">
+
+							{if $st_pos.type eq 1}
+							<span class="til">已预购</span>
+							{else}
+							<span class="til">已众筹:</span>
+							{/if}
+							<span class="num"><font>{function name="round" v=$st_pos.support_amount e=2}</font>元</span>
+						</div>
+
+						<!--title-->
+						<div class="div3 div3_last">
+					<span class="til">
+						{if $st_pos.begin_time > $now}
+							已经预热
+						{elseif ($st_pos.end_time < $now and $st_pos.end_time neq 0) }
+							结束时间
+						{else}
+							{if $st_pos.end_time eq 0}
+								长期项目
+							{else}
+								剩余时间:
+							{/if}
+						{/if}
+					</span>
+							{$st_pos.left_begin_days}
+							{if $st_pos.begin_time > $now}
+							<span class="num" ><font>{$st_pos.left_begin_days}</font>天</span>
+							{elseif $st_pos.end_time < $now and $st_pos.end_time neq 0}
+							<span class="num" >{function name="to_date" v="$st_pos.end_time" f="y/m/d"}</span>
+							{else}
+							<span class="num">
+						{if $st_pos.end_time eq 0}
+						长期项目
+						{else}
+						<font>{$st_pos.remain_days}</font>天
+						{/if}
+					</span>
+							{/if}
+						</div>
+
+						{/if}
+						<span class="f_l"style="margin-top: 3px;margin-left: 2px;">众筹额：<em class="f_red"><i class="font-yen">¥</i>{function name="round" v=$st_pos.limit_price e=2}</em></span>
+					</div>
+
+				</div>
+				</a>
+
+			</div>
+			{/if}
+			{/foreach}
+		</div>
+	</div>
+</div>
+<!-- 新增商砼众筹项目    结束-->
+
+<!-- 成功项目 开始 -->
+<div class="index_m index_success">
+	<div class="wrap">
+	<!--
+		<div class="project_com_tit clear" style="color: #feb106;width: 250px;font-size: 28px;height: 65px;line-height: 65px;text-align: center;margin: 15px auto;border: 2px solid #acdddd;border-radius: 10px;">
+	成功项目
+		</div>
+-->
+<div class="project_com_tit clear"><img src="{$TMPL}/images/text_3.png"  style="margin:30px auto 60px;"/></div>
+	<div class="nav_list" >
+			{foreach from=$deal_success_list item=deal_success_item key=key name=deal_success_items}
+			{if $smarty.foreach.deal_success_items.iteration lte 8}
+
+			<div style="margin-top:10px;" class="nav_item{if $smarty.foreach.deal_success_items.iteration mod 4 eq 1} first{/if}">
+
+		<a href="{url r="deal#show" p="id=$deal_success_item.id"}" target="_blank">
+		<div class="project_image">
+			<img src="{if $deal_success_item.image eq ''}{$TMPL}/images/empty_thumb.gif{else}{function name="get_spec_image" v=$deal_success_item.image w="285" h="200" g="1"}{/if}" alt="{$deal_success_item.name}" lazy="true" />
+
+			<!--状态-->
+				{if $deal_success_item.type eq 0}
+				{if $deal_success_item.begin_time > $now}
+				<span class="project_step project_begin">预热中</span>
+				{elseif $deal_success_item.issharing eq 1}
+				<span {if $deal_success_item.issharing eq 1}class="project_step project_success"{else}class="project_step project_fail"{/if}>{if $deal_success_item.issharing eq 1}已分红{else}已成功{/if}</span>
+				{else}
+					{if $deal_success_item.percent gte 100}
+						<span class="project_step project_fail">已成功</span>
+					{else}
+						<span class="project_step project_sprite">
+							{if $deal_success_item.end_time eq 0}
+							长期项目
+							{else}
+								{if $deal_success_item.type eq 1}
+								融资中
+								{else}
+								众筹中
+								{/if}
+		 					{/if}
+						</span>
+					{/if}
+				{/if}
+			{/if}
+		</div>
+		<div class="project_text">
+		<!--项目名称-->
+			<span class="project_title">{function name="msubstr" v=$deal_success_item.name b=0 e=25}</span>
+		 	<div class="project_schedule">
+				{if $deal_success_item.begin_time > $now}
+
+				{else}
+				<!--money-->
+				<div class="div3 div3_middle">
+
+		 			{if $deal_success_item.type eq 1}
+					<span class="til">已预购</span>
+					{else}
+					<span class="til">已众筹:</span>
+					{/if}
+					<span class="num"><font>{function name="round" v=$deal_success_item.support_amount e=2}</font>元</span>
+				</div>
+
+				<!--title-->
+				<div class="div3 div3_last">
+					<span class="til">
+						{if $deal_success_item.begin_time > $now}
+							已经预热
+						{elseif ($deal_success_item.end_time < $now and $deal_success_item.end_time neq 0) }
+							结束时间
+						{else}
+							{if $deal_success_item.end_time eq 0}
+								长期项目
+							{else}
+								剩余时间:
+							{/if}
+						{/if}
+					</span>
+					{$deal_success_item.left_begin_days}
+					{if $deal_success_item.begin_time > $now}
+					<span class="num" ><font>{$deal_success_item.left_begin_days}</font>天</span>
+					{elseif $deal_success_item.end_time < $now and $deal_success_item.end_time neq 0}
+					<span class="num" >{function name="to_date" v="$deal_success_item.end_time" f="y/m/d"}</span>
+					{else}
+					<span class="num">
+						{if $deal_success_item.end_time eq 0}
+						长期项目
+						{else}
+						<font>{$deal_success_item.remain_days}</font>天
+						{/if}
+					</span>
+					{/if}
+				</div>
+
+				{/if}
+				<span class="f_l"style="margin-top: 3px;margin-left: 2px;">众筹额：<em class="f_red"><i class="font-yen">¥</i>{function name="round" v=$deal_success_item.limit_price e=2}</em></span>
+			</div>
+
+		</div>
+	</a>
+
+			</div>
+			{/if}
+			{/foreach}
+		</div>
+		<div class="blank0"></div>
+	</div>
+</div>
+<!-- 成功项目 结束 -->
+
+
+<!-- 看看谁加入了 开始 -->
+	<div class="project_news clear" style="width: 100%;margin-bottom: 80px;max-width:1200px;padding-top:20px;">
+		<div class="project_com_tit clear"><img src="{$TMPL}/images/text_4.png"/ style="margin:30px auto 60px;"></div>
+		<div class="project_news_r project_newss" style="width: 500px;float: left;margin-left:20px;">
+			<div class="project_news_top" style="width: 100%;height: 36px;line-height: 36px;border-bottom: 2px solid #feb006;margin-bottom: 25px;">
+				<h1 style="width: 87%;display: inline-block;*display: block;font-size: 16px;color: #131313; font-size:20px">新闻资讯</h1>
+				<a href="http://www.yiaoshiye.com/index.php?ctl=article_cate&id=38" style="width: 10%;display: inline-block;*display: block;text-align: right;font-size: 14px;color: #131313;">更多</a>
+			</div>
+			<ul class="project_news_list" style="width: 100%;">
+				{foreach from=$artilce_list item=article_item}
+				<li class="clear" style="width: 100%;height: 50px;line-height: 50px;border-bottom: 2px dashed #dcdcdb;background: url(app/Tpl/fanwe_1/images/dian.jpg) no-repeat 0px center;font-size: 14px;color: #131313;">
+					<a href="" style="blr: expression(this.onFocus=this.blur());text-decoration: none;color: #333;">
+						<div class="list_l" style="width: 65%;float: left;margin-left: 5%;"><a href="{$article_item.url}">{$article_item.title}</a></div>
+						<div class="list_r" style="width: 30%;float: left;text-align: right;">{function name="to_date" v=$article_item.update_time p="Y-m-d"}</div>
+					</a>
+				</li>
+				{/foreach}
+
+			</ul>
+		</div>
+		<div class="project_news_r project_newss" style="width: 500px;float: right;margin-left:20px;">
+			<div class="project_news_top" style="width: 100%;height: 36px;line-height: 36px;border-bottom: 2px solid #feb006;margin-bottom: 25px;">
+				<h1 style="width: 87%;display: inline-block;*display: block;font-size: 16px;color: #131313;font-size:20px">企业动态</h1>
+				<a href="http://www.yiaoshiye.com/index.php?ctl=dongtai_cate&id=39" style="width: 10%;display: inline-block;*display: block;text-align: right;font-size: 14px;color: #131313;">更多</a>
+			</div>
+			<ul class="project_news_list" style="width: 100%;">
+				{foreach from=$artilce_gonggao item=article_item}
+				<li class="clear" style="width: 100%;height: 50px;line-height: 50px;border-bottom: 2px dashed #dcdcdb;background: url(app/Tpl/fanwe_1/images/dian.jpg) no-repeat 0px center;font-size: 14px;color: #131313;">
+					<a href="" style="blr: expression(this.onFocus=this.blur());text-decoration: none;color: #333;">
+						<div class="list_l" style="width: 65%;float: left;margin-left: 5%;"><a href="{$article_item.url}">{$article_item.title}</a></div>
+						<div class="list_r" style="width: 30%;float: left;text-align: right;">{function name="to_date" v=$article_item.update_time p="Y-m-d"}</div>
+					</a>
+				</li>
+				{/foreach}
+			</ul>
+		</div>
+	</div>
+
+<!-- 看看谁加入了 结束 -->
+<script type="text/javascript">
+(function(){
+	// 统计数值滚动
+	var options = {
+	    useEasing : true,
+	    useGrouping : true,
+	    separator : ',',
+	    decimal : '.',
+	    prefix : '',
+	    suffix : ''
+	};
+	var sum_money = new countUp("sum_money", 0, {$virtual_money}, 2, 2.5, options);
+	var sum_success = new countUp("sum_success", 0, {$success_sum}, 0, 2.5, options);
+	var sum_online = new countUp("sum_online", 0, {$virtual_effect}, 0, 2.5, options);
+	var sum_user = new countUp("sum_user", 0, {$register_sum}, 0, 2.5, options);
+	sum_money.start();
+	sum_success.start();
+	sum_online.start();
+	sum_user.start();
+})();
+
+// 会员头像列表
+(function(){
+
+
+    $(".user_text").hide();
+    var $reg_user_list=$(".reg_user_list");
+    var $reg_user_list_li=$(".reg_user_list").find("li");
+    if($reg_user_list_li.length>=10){
+    	$reg_user_list_li.eq(9).removeClass("left_o").addClass("right_o");
+    	$reg_user_list_li.eq(10).removeClass("left_o").addClass("right_o");
+    	if($reg_user_list_li.length>=21){
+    		$reg_user_list_li.eq(20).removeClass("left_o").addClass("right_o");
+    		$reg_user_list_li.eq(21).removeClass("left_o").addClass("right_o");
+    	}
+    }
+    $reg_user_list_li.css("zIndex","1");
+ 	$reg_user_list_li.hover(function(){
+		$obj=$(this);
+		$obj.css({zIndex:"2"});
+
+		$obj.find(".user_img").css("zIndex","101");
+ 		if($obj.hasClass("left_o")){
+ 			$obj.prevAll().css("zIndex","3");
+		 	$obj.find(".user_text").stop().animate({left:'106'}, {duration:500}).show().css("zIndex","100");
+ 		}
+ 		else{
+ 			$obj.nextAll().css("zIndex","3");
+ 			$obj.find(".user_text").stop().animate({right:'106'}, {duration:500}).show().css("zIndex","100");
+ 		}
+    },function(){
+    	$reg_user_list_li.css("zIndex","1");
+    	$obj.css("zIndex","1");
+    	if($obj.hasClass("left_o")){
+	 		$obj.find(".user_text").stop().animate({left:'106'}, {duration: "fast"}).hide();
+   	 		$obj.find(".user_text").animate({left:'-96'}, {duration: 0}).hide();
+    	}
+    	else{
+    		$obj.find(".user_text").stop().animate({right:'106'}, {duration: "fast"}).hide();
+   	 		$obj.find(".user_text").animate({right:'-93'}, {duration: 0}).hide();
+    	}
+    });
+})();
+
+ajax_get_recommend_project();
+//获取会员所有项目列表
+function ajax_get_recommend_project(){
+	$("a[name='recommend_project']").bind("click",function(){
+		if($(this).attr("rel")=='{$user_info.id}'){
+			$.showErr("不能给自己推荐！");
+			return false;
+		}
+		var ajaxurl ='{url r="ajax#ajax_get_recommend_project"}';
+		var query=new Object();
+		//推荐人id
+		query.id='{$user_info.id}';
+		//被推荐人id
+		query.user_id=$(this).attr("rel");
+		$.ajax({
+			url: ajaxurl,
+			dataType: "json",
+			data:query,
+			type: "POST",
+			success:function(ajaxobj){
+				if(ajaxobj.status==0){
+					show_pop_login();
+					return false;
+				}
+				if(ajaxobj.status==1){
+					$.showErr(ajaxobj.info);
+					return false;
+				}
+				if(ajaxobj.status==2){
+					$.weeboxs.open(ajaxobj.html, {boxid:'project_recommend_page',contentType:'text',showButton:false, showCancel:false, showOk:false,title:'我的项目',width:480,type:'wee'});
+					return false;
+				}
+			}
+		});
+	});
+}
+</script>
+<script type="text/javascript">
+	leftTimeAct(".left_time");
+	leftTimeAct(".left_times");
+	// 未开始项目倒计时
+    function leftTimeAct(left_time){
+    	var leftTimeActInv = null;
+		clearTimeout(leftTimeActInv);
+		$(left_time).each(function(){
+			var leftTime = parseInt($(this).attr("data"));
+			if(leftTime > 0)
+			{
+				var day  =  parseInt(leftTime / 24 /3600);
+				var hour = parseInt((leftTime % (24 *3600)) / 3600);
+				var min = parseInt((leftTime % 3600) / 60);
+				var sec = parseInt((leftTime % 3600) % 60);
+				$(this).find(".day").html((day<10?"0"+day:day));
+				$(this).find(".hour").html((hour<10?"0"+hour:hour));
+				$(this).find(".min").html((min<10?"0"+min:min));
+				$(this).find(".sec").html((sec<10?"0"+sec:sec));
+				leftTime--;
+				$(this).attr("data",leftTime);
+			}
+			else{
+				window.location.reload();
+				return false;
+			}
+		});
+		leftTimeActInv = setTimeout(function(){
+			leftTimeAct(left_time);
+		},1000);
+	}
+</script>
+	<script type="text/javascript">
+		$(".login_top2 a").click(function(){
+			$(this).addClass("login_top2_a").siblings("a").removeClass("login_top2_a");
+			var index=$(this).index();
+			$(".login_cont").eq(index).show().siblings(".login_cont").hide();
+		})
+	</script>
+{include file="inc/footer.html"}

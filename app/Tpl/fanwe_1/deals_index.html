@@ -1,0 +1,161 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/index.css";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/discover.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/discover.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}"/>
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<style>
+.field_select{margin-right:0}
+.field_select dt{height:26px;line-height:26px}
+.field_select dt i{top:12px;}
+.banner {width: 100%;height: 353px;margin-top: -2px;}
+.banner.banner_cont {height: 100%;}
+.wrap{width:1221px;}
+.project_image{margin-top:10px;}
+</style>
+
+<!--<div class="banner slideBox" id="banner">
+<div class="banner_cont effect_bd">
+		<ul>
+
+			<li><a href="#" target="_blank" style="display:block;background: url(/app/Tpl/fanwe_1/images/bann.jpg) 50% 50% no-repeat;"></a></a></li>
+	
+		</ul>
+	</div>
+		<div class="btn_tit effect_hd">
+		{foreach from=$image_list item=image_item}
+		<span></span>
+		{/foreach}
+	</div>
+</div>-->
+<script type="text/javascript"> 
+	if(!$(".banner_cont ul").has('li').length){ 
+		$("#banner").css("display","none");
+	} 
+	
+	if($(".banner_cont ul").find('li').length==1){ 
+		$(".btn_tit").css("display","none");
+	}
+	else if($(".banner_cont ul").find('li').length>1){
+		$(".btn_tit").css("display","block");
+	}
+	if($(".banner_cont ul").find('li').length>1){
+		jQuery("#banner").slide({mainCell:".banner_cont ul",titCell:".effect_hd span",effect:"leftLoop",easing:"easeInOutQuint",delayTime:500,autoPlay:true});
+		$("#banner").mousemove(function(){
+			$(this).find(".prev").show();
+			$(this).find(".next").show();
+		}).mouseout(function(){
+			$(this).find(".prev").hide();
+			$(this).find(".next").hide();
+		});
+	}
+</script>
+
+<style>
+	.case{height: auto !important;}
+</style>
+<div id="J_wrap" class="case" style="background: #fff5e7; ">
+	<div class="ui-deals wrap" >
+		<adv adv_id="deals_top" />
+		<div class="blank20"></div>
+		<div class="ui_deals_filter">
+			<div class="ui_deals_filter_item">
+				<div class="filter_item" style="border-bottom: 1px dashed #e5e5e5;">
+					<label class="f_l">所属行业：</label>
+					<div class="filter_text f_l">
+						<ul>
+							<li {if {if $p_id eq 0}class="current"{/if}}>
+								<a href="{url r="deals" p="loc=$p_loc&type=$p_type"}" title="全部">全部</a>
+							</li>
+							{foreach from=$cate_list item=cate_item}
+							<li {if $pid eq $cate_item.id}class="current"{/if}>
+								{if $cate_item.pid eq 0}
+								<a href="{$cate_item.url}" title="{$cate_item.name}">{$cate_item.name}</a>
+								{/if}
+							</li>
+							{/foreach}
+						</ul>
+					</div>
+					{if $child_cate_list}
+					<div class="blank0"></div>
+					<div class="ui_deals_filter_l child_cate">
+						<ul>
+							{foreach from=$child_cate_list item=child_cate_item}
+							<li {if $p_id eq $child_cate_item.id}class="current"{/if}>
+								<a href="{$child_cate_item.url}" title="{$child_cate_item.name}">{$child_cate_item.name}</a>
+							</li>
+							{/foreach}
+						</ul>
+						<div class="blank0"></div>
+					</div>
+					<div class="blank5"></div>
+					{/if}
+				</div>
+			</div>
+			<div class="ui_deals_filter_item last_item">
+				<div class="filter_item" id="deals_area">
+					<label class="f_l">所属地区：</label>
+					<div class="filter_text f_l">
+						<ul>
+							<li {if $p_loc eq ''}class="current"{/if}>
+								<a href="{url r="deals" p="r=$p_r&id=$p_id&type=$p_type"}" value="">全部</a>
+							</li>
+							{foreach from=$city_list item=city_item}
+							{if $city_item.province neq ''}
+							<li {if $p_loc eq $city_item.province}class="current"{/if}>
+								<a href="{$city_item.url}" target="_self" value="">{$city_item.province}</a>
+							</li>
+							{/if}
+							{/foreach}
+						</ul>
+					</div>
+					
+					<a href="javascript:void(0);" onclick="javascript:show_pop_region();" class="more_city hide"><i class="icon iconfont">&#xe619;</i>选择更多城市</a>
+				</div>
+			</div>
+			<div class="ui_deals_filter_item last_item">
+				<div class="filter_itemcx" id="deals_area">
+					<label class="f_l">众筹状态：</label>
+					<div class="filter-box">
+				<div class="rel-key-rec f_r" style="padding:1px 0;float: left;overflow: hidden;">
+					<a href="{url r="deals" p="type=$p_type"}" {if $p_state eq ''} class="current"{/if}>全部{if $p_state eq ''}{/if}</a>
+					{foreach from=$state_list item=state_item key=key}
+					<a href="{$state_item.url}" title="{$state_item.name}" {if $p_state eq $key}class="current"{/if}>{$state_item.name}{if $p_state eq $key}{/if}</a>
+					{/foreach}	
+				</div>
+			</div>
+			
+				</div>
+			</div>
+			<div class="blank0"></div>
+		</div>
+		<div id="pin_box">
+			<div class="deal_item_list">
+				{if $p_type eq 1}
+					{include file="inc/deal_list_invest.html"}
+				{else}
+					{include file="inc/deal_list.html"}
+				{/if}
+			</div>
+		</div>	
+		<div class="blank"></div>
+		<div id="pin_loading" rel="{url r="ajax#deals" p="r=$p_r&id=$p_id&loc=$p_loc&tag=$p_tag&k=$p_k&p=$current_page&state=$p_state&type=$p_type&price=$price&focus=$focus&time=$time&cp=$cp"}">正在努力加载</div>	
+		<div class="pages">{$pages}</div>
+		<div class="blank20"></div>
+		<adv adv_id="deals_bottom" />
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var $deals_area=$("#deals_area");
+		if($deals_area.find("li").length>=17){
+			$(this).find(".more_city").show();
+		}
+		$("embed").attr({ windowlessVideo: "1", wmode: "transparent" });
+	});
+</script>
+{include file="inc/footer.html"} 

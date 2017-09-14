@@ -1,0 +1,132 @@
+{include file="inc/header.html"}
+<?php
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/deal_vote.css";
+$this->_var['dpagecss'][] = $this->_var['TMPL_REAL']."/css/fancybox.css";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.fancybox.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/deal.js";
+$this->_var['dpagejs'][] = $this->_var['TMPL_REAL']."/js/deal_comment.js";
+$this->_var['dcpagejs'][] = $this->_var['TMPL_REAL']."/js/deal_comment.js";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dpagecss"}" />
+<script type="text/javascript" src="{function name="parse_script" v="$dpagejs" c="$dcpagejs"}"></script>
+<div class="blank0"></div>
+		<!--中间开始-->
+		<div class="xqmain">
+		<!--中间页面头部start-->
+		{include file="inc/deal_header.html"}
+		<!--中间页面头部end-->
+		<div class="xqmain_main">
+		<span class="title f_l">{$deal_info.name}</span>
+<input type="hidden" id="deaid" value={$deal_info.id}>
+<input type="hidden" id="userid" value={$user_info.id} >
+</div>
+<div id="box_bg">
+		<div id="container">
+		<div id="green" class="line"></div>
+		<div id="red" class="line"></div>
+		<div id="white" class="line"></div>
+		<div id="vs"></div>
+		</div>
+		</div>
+		<div style="width:417px; margin:24px auto;margin-left: 54px;">
+		<div id="aa2" class="scope">同意<span id="aa"></span>票</div>
+		<div id="bb2" class="scope">反对<span id="bb"></span>票</div>
+		<div id="all2" class="scope">总共<span id="all"></span>票</div>
+		</div>
+
+		<input type="button" class="button" id="yes" value="同意"  onclick="yesVote();"style="background: #07a0ed none repeat scroll 0 0;border-radius: 3px;color: #fff;display: inline-block; font-size: 16px; height: 45px;  line-height: 45px; text-align: center; width: 86px;margin-left: 50px;"/>
+		<input type="button" class="button" id="no" value="反对"   onclick="noVote();" style="background: #07a0ed none repeat scroll 0 0;border-radius: 3px;color: #fff;display: inline-block; font-size: 16px; height: 45px;  line-height: 45px; text-align: center; width: 86px;margin-left: 265px;"/>
+		<script type="text/javascript">
+
+		function yesVote(){
+			var id = $("#deaid").val();
+			var uid = $("#userid").val();
+			$.post("/pay/upyesVote.php",{"id":id,"uid":uid},function(data){
+				if(data=='1'){
+					alert("投票成功");
+				}else{
+					alert(data);
+				}
+			});
+			alert("正在投票");
+			var url = "http://yiaoshiye.com/index.php?ctl=deal&act=vote&id="+id;
+			window.location.href= url;
+
+		};
+function noVote(){
+	var id = $("#deaid").val();
+	var uid = $("#userid").val();
+	$.post("/pay/upnoVote.php",{"id":id,"uid":uid},function(data){
+		if(data=='1'){
+			alert("投票成功");
+		}else{
+			alert(data);
+		}
+	});
+	alert("正在投票");
+	var url = "http://www.yiaoshiye.com/index.php?ctl=deal&act=vote&id="+id;
+	window.location.href= url;
+
+};
+$(document).ready(function(){
+	var a = parseInt($(".yesVote").html());
+	var b = parseInt($(".novote").html());
+	$("#white").animate({ width: 0,left:"250px"}, 1000 ,function(){
+		$("#vs").fadeIn("slow",function(){
+			$("#all").html(a+b);
+			$("#aa").html(a);
+			$("#bb").html(b);
+			var newLeft = a/(a+b)*437-20 + "px"; //20为vs 的一半
+			$("#vs").animate({left:newLeft}, 1000);
+			$("#red").animate({width:newLeft}, 1000);
+		});
+	});
+});
+</script>
+<div id="show" style="display:none;width:100%;height:100%;position:absolute;top:0px;">
+	<div style="width:100%;height:100%;background-color:#000;position:absolute;top:0px;-moz-opacity:0.4;opacity:0.4;filter:alpha(opacity=40);"></div>
+	<div class="table-list"  style=" POSITION:absolute; left:50%; top:50%; width:1200px; height:400px; margin-left:-661px; margin-top:-200px; border:2px solid #888;background-color: #fff; text-align:center">
+
+		<!--start-->
+		<table width="100%" cellspacing="0" >
+			<thead>
+			<tr>
+				<th align="center">编号</th>
+				<th align="center">同意</th>
+				<th align="center">反对</th>
+			</tr>
+			</thead>
+			<tbody id="body_main2">
+			<?php $members=$GLOBALS['db']->getAll("select * from  ".DB_PREFIX."deal where  id='".$_REQUEST['id']."'"); ?>
+
+			<?php foreach($members as $v){
+		   ?>
+			<tr>
+				<td align="center" class="id"><?php echo $v['id']; ?></td>
+				<td align="center" class="yesVote"><?php echo $v['yes_vote']; ?></td>
+				<td align="center" class="novote"><?php echo $v['no_vote']; ?></td>
+			</tr>
+			<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!--左-->
+
+<!--左结束-->
+<!--右-->
+{if $deal_info eq 0}
+{include file="inc/deal_right.html"}
+{/if}
+{if $deal_info eq 1}
+{include file="inc/deal_investor_right.html"}
+{/if}
+<!--右结束-->
+<div class="blank0"></div>
+</div>
+</div>
+<!--中间结束-->
+<div id="gotop" style="display: block;z-index:99;"></div>
+<div class="blank0"></div>
+{include file="inc/footer.html"}
